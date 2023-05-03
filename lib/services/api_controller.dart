@@ -31,16 +31,11 @@ class ApiProvider {
 
   Future<Lesson> retrieveLessons(slug) async {
     var dio = Dio();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    dio.options.headers["Authorization"] = "Bearer ${prefs.getString("token")}";
     Response response = await dio.get(
-      '${AppUrl.lessonUrl}/$slug',
+    '${AppUrl.lessonUrl}/$slug',
       queryParameters: {'post_modified': '2021-10-30 13:28:40'},
-      options: Options(
-        headers: {
-          'username': AppUrl.username,
-          'password': AppUrl.password,
-          'login_with': AppUrl.loginWith,
-        },
-      ),
     );
     if (response.statusCode == 200) {
       final responseBody = response.data;
