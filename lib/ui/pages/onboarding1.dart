@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:learncoding/api/google_signin_api.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../screens/quiz/quiz_screen.dart';
+
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
 
@@ -188,7 +190,8 @@ class OnboardingState extends State<Onboarding> {
 
     // ignore: use_build_context_synchronously
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => (const MenuDashboardLayout())));
+    MaterialPageRoute(builder: (context) => (  QuizScreen())));
+        //MaterialPageRoute(builder: (context) => (const MenuDashboardLayout())));
   }
 
   @override

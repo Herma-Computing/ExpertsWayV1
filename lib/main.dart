@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:learncoding/global/globals.dart' as globals;
 import 'package:learncoding/routes/router.dart' as router;
+import 'package:learncoding/ui/screens/quiz/quiz_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
@@ -127,7 +128,10 @@ class SplashScreen extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       pageTransitionType: PageTransitionType.fade,
       nextScreen:
-          name == null ? const Onboarding() : const MenuDashboardLayout(),
+          name == null ? const Onboarding() : MenuDashboardLayout(),
+          
+          
+          //const 
     );
   }
 }
