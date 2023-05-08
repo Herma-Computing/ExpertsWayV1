@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 import '../../db/course_database.dart';
 import '../../models/course.dart';
 import '../../models/notification.dart';
+import '../screens/quiz/quiz_screen.dart';
 
 class LessonPage extends StatefulWidget {
   final List<LessonElement?> lessonData;
@@ -415,6 +416,8 @@ class _LessonState extends State<LessonPage> {
 
   void launchTest() {
     // TODO: implement this method
+    Navigator.push(context,CupertinoPageRoute(builder: (context) => QuizScreen(),),
+    );
   }
 
   Widget buildCoverImage() {
