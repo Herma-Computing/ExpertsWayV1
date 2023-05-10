@@ -23,7 +23,7 @@ class SecondScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 35, left: 35, top: 35),
                 child: SvgPicture.asset(
-                  'assets/images/thirs.svg',
+                  'assets/images/personal_goal.svg',
                 ),
               ),
               CircleAvatar(
@@ -33,7 +33,7 @@ class SecondScreen extends StatelessWidget {
                   "${_qnController.correctAns * 1}/${_qnController.questions.length * 1}",
                   style: Theme.of(context)
                       .textTheme
-                      .headline4!
+                      .headlineMedium!
                       .copyWith(color: kSecondaryColor),
                 ),
               ),
