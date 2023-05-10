@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:learncoding/ui/constants.dart';
 
 import '../../../services/controllers/question_controller.dart';
-import '../../constants.dart';
 
-class ScreenThree extends StatelessWidget {
-  const ScreenThree({Key? key}) : super(key: key);
+class FirstScreen extends StatelessWidget {
+  const FirstScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-           QuestionController _qnController = Get.put(QuestionController());
+    QuestionController _qnController = Get.put(QuestionController());
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -21,10 +21,10 @@ class ScreenThree extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 35, left: 35, top: 35),
                 child: SvgPicture.asset(
-                  'assets/images/thirs.svg',
+                  'assets/images/second.svg',
                 ),
               ),
-            CircleAvatar(
+              CircleAvatar(
                 backgroundColor: HexColor('#26B0FF').withOpacity(1),
                 radius: 45,
                 child: Text(
@@ -35,52 +35,27 @@ class ScreenThree extends StatelessWidget {
                       .copyWith(color: kSecondaryColor),
                 ),
               ),
+              Text('Good Job'),
               Padding(
                 padding: const EdgeInsets.all(18.0),
-                child: Text(
-                  "You've Failed",
-                  style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              Column(
-                children: [
-                  Text('You’re one step closer to etting to',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: HexColor('#2E2E2E').withOpacity(0.5),
-                          fontWeight: FontWeight.normal)),
-                  Padding(
-                    padding: const EdgeInsets.all(9.0),
-                    child: Text(' your goals  Keep this up and you’ll ',
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: HexColor('#2E2E2E').withOpacity(0.5),
-                            fontWeight: FontWeight.normal)),
-                  ),
-                  Text('be there  We Believe In You!  ',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: HexColor('#2E2E2E').withOpacity(0.5),
-                          fontWeight: FontWeight.normal))
-                ],
+                child: const Text(
+                    'Good Job, You’re making progress but we believe that +'
+                    ' you can do even more. Don’t Give Up!!'),
               ),
               Container(
-                margin: const EdgeInsets.all(42),
+                margin: const EdgeInsets.all(60),
                 width: 208.47,
                 height: 44,
                 decoration: BoxDecoration(
-                    gradient: LinearGradient(
+                    gradient: const LinearGradient(
                       begin: Alignment.centerRight,
                       end: Alignment.centerLeft,
                       colors: [
-                        HexColor('#26B0FF').withOpacity(1),
-                        HexColor('#26B0FF'),
+                        Color(0xff15BE77),
+                        Color(0xff53E88B),
                       ],
                     ),
-                    borderRadius: BorderRadius.circular(15)),
+                    borderRadius: BorderRadius.circular(10)),
                 child: const Center(
                   child: Text(
                     'Continue',

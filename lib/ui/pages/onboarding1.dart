@@ -190,8 +190,8 @@ class OnboardingState extends State<Onboarding> {
 
     // ignore: use_build_context_synchronously
     Navigator.of(context).pushReplacement(
-    MaterialPageRoute(builder: (context) => (  QuizScreen())));
-        //MaterialPageRoute(builder: (context) => (const MenuDashboardLayout())));
+        MaterialPageRoute(builder: (context) => (QuizScreen())));
+    //MaterialPageRoute(builder: (context) => (const MenuDashboardLayout())));
   }
 
   @override

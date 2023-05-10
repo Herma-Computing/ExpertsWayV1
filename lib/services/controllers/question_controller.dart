@@ -3,14 +3,18 @@ import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 
 import '../../models/Questions.dart';
+import '../../ui/screens/IntroPage/screeen1.dart';
+import '../../ui/screens/IntroPage/screeen2.dart';
 import '../../ui/screens/IntroPage/screeen3.dart';
+import '../../ui/screens/score/score_screen.dart';
 
 
-
+QuestionController _qnController = Get.put(QuestionController());
 
 // We use get package for our state management
 
 class QuestionController extends GetxController
+
     with SingleGetTickerProviderMixin {
   // Lets animated our progress bar
 
@@ -36,7 +40,7 @@ class QuestionController extends GetxController
   bool _isAnswered = false;
   bool get isAnswered => this._isAnswered;
 
-  late int _correctAns;
+   int _correctAns =0;
   int get correctAns => this._correctAns;
 
   late int _selectedAns;
@@ -108,8 +112,19 @@ class QuestionController extends GetxController
       // Once timer is finish go to the next qn
       _animationController.forward().whenComplete(nextQuestion);
     } else {
+      
+      if((_qnController.correctAns * 1)>=3){
+            Get.to(SecondScreen());
+
+      }else if((_qnController.correctAns * 1) ==2 ){
+            Get.to(FirstScreen());
+
+      }else{
+            Get.to(ScreenThree());
+
+      }
       // Get package provide us simple way to naviigate another page
-      Get.to(SecondScreen());
+  
     }
   }
 

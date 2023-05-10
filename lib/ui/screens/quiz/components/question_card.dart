@@ -6,7 +6,8 @@ import 'package:hexcolor/hexcolor.dart';
 import '../../../../models/Questions.dart';
 import '../../../../services/controllers/question_controller.dart';
 import '../../../constants.dart';
-import '../../IntroPage/screeen3.dart';
+import '../../../pages/navmenu/menu_dashboard_layout.dart';
+import '../../IntroPage/screeen2.dart';
 import 'option.dart';
 
 class QuestionCard extends StatelessWidget {
@@ -57,7 +58,7 @@ class QuestionCard extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => SecondScreen()));
+                            builder: (context) => MenuDashboardLayout()));
                   },
                   child: Text(
                     "Skip",
