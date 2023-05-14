@@ -80,10 +80,11 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/
-    - assets/images/Capture.PNG
-    - assets/images/p1.jpg
-    - assets/images/p2.jpg
+    - assets/images/.
+
+ # you don't nees to specify all image path that are found inside -assets/images/  here, 
+ #you can use all file inside assets/images/ folder since it is alredy specified 
+ 
 
   fonts:
     - family: Poppins

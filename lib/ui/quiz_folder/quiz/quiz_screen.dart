@@ -8,7 +8,7 @@ class QuizScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
-    return Scaffold(
+    return const Scaffold(
       extendBodyBehindAppBar: true,
       // appBar: AppBar(
       //   // Fluttter show the back button automatically

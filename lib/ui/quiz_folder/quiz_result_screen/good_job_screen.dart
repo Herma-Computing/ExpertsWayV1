@@ -18,10 +18,11 @@ class GoodJobScreen extends StatelessWidget {
             child: SingleChildScrollView(
           child: Column(
             children: [
+             
               Padding(
                 padding: const EdgeInsets.only(right: 35, left: 35, top: 35),
                 child: SvgPicture.asset(
-                  'assets/images/second.svg',
+                  'assets/images/thirs.svg',
                 ),
               ),
               CircleAvatar(

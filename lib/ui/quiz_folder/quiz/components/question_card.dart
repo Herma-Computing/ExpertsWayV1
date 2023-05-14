@@ -30,6 +30,7 @@ class QuestionCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(25),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
             question.question,

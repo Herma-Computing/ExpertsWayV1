@@ -17,7 +17,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // So that we have acccess our controller
-    QuestionController _allquestionController = Get.put(QuestionController());
+    QuestionController allquestionController = Get.put(QuestionController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -26,19 +26,23 @@ class Body extends StatelessWidget {
           SafeArea(
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                ProgressBar(),
+                const ProgressBar(),
                 CircleAvatar(
-                  backgroundColor: HexColor('#26B0FF').withOpacity(0.8),
                   radius: 45,
-                  child: Text(
-                    '1:30',
-                    style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                  backgroundColor: HexColor('#26B0FF'),
+                  child: CircleAvatar(
+                    backgroundColor: HexColor("#FFFFFF"),
+                    radius: 42,
+                    child: Text(
+                      '1:39',
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: HexColor('#26B0FF'),
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
                 //               Text(
@@ -51,12 +55,12 @@ class Body extends StatelessWidget {
                 Expanded(
                   child: PageView.builder(
                     // Block swipe to next qn
-                    physics: NeverScrollableScrollPhysics(),
-                    controller: _allquestionController.pageController,
-                    onPageChanged: _allquestionController.updateTheQnNum,
-                    itemCount: _allquestionController.questions.length,
+                    physics:const  NeverScrollableScrollPhysics(),
+                    controller: allquestionController.pageController,
+                    onPageChanged: allquestionController.updateTheQnNum,
+                    itemCount: allquestionController.questions.length,
                     itemBuilder: (context, index) => QuestionCard(
-                        question: _allquestionController.questions[index]),
+                        question: allquestionController.questions[index]),
                   ),
                 ),
               ],
