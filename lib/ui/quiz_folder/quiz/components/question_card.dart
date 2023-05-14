@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -7,7 +6,7 @@ import '../../../../models/Questions.dart';
 import '../../../../services/controllers/question_controller.dart';
 import '../../../constants.dart';
 import '../../../pages/navmenu/menu_dashboard_layout.dart';
-import '../../IntroPage/screeen2.dart';
+
 import 'option.dart';
 
 class QuestionCard extends StatelessWidget {
@@ -35,7 +34,7 @@ class QuestionCard extends StatelessWidget {
             question.question,
             style: Theme.of(context)
                 .textTheme
-                .headline6!
+                .titleLarge!
                 .copyWith(color: kBlackColor),
           ),
           ...List.generate(
@@ -53,6 +52,8 @@ class QuestionCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               MaterialButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(22.0)),
                   color: Colors.white,
                   onPressed: () {
                     Navigator.push(
@@ -67,6 +68,8 @@ class QuestionCard extends StatelessWidget {
                     ),
                   )),
               MaterialButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(22.0)),
                   color: HexColor('#26B0FF').withOpacity(1),
                   onPressed: _controller.nextQuestion,
                   child: Text("Next")),

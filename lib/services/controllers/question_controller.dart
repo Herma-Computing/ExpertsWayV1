@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 
 import '../../models/Questions.dart';
-import '../../ui/screens/IntroPage/screeen1.dart';
-import '../../ui/screens/IntroPage/screeen2.dart';
-import '../../ui/screens/IntroPage/screeen3.dart';
-import '../../ui/screens/score/score_screen.dart';
+
+import '../../ui/quiz_folder/quiz_result_screen/amazing_screen.dart';
+import '../../ui/quiz_folder/quiz_result_screen/failed_screen.dart';
+import '../../ui/quiz_folder/quiz_result_screen/good_job_screen.dart';
 
 
 QuestionController _qnController = Get.put(QuestionController());
@@ -14,8 +14,7 @@ QuestionController _qnController = Get.put(QuestionController());
 // We use get package for our state management
 
 class QuestionController extends GetxController
-
-    with SingleGetTickerProviderMixin {
+    with GetSingleTickerProviderStateMixin {
   // Lets animated our progress bar
 
   late AnimationController _animationController;
@@ -40,7 +39,7 @@ class QuestionController extends GetxController
   bool _isAnswered = false;
   bool get isAnswered => this._isAnswered;
 
-   int _correctAns =0;
+  int _correctAns = 0;
   int get correctAns => this._correctAns;
 
   late int _selectedAns;
@@ -94,9 +93,9 @@ class QuestionController extends GetxController
     update();
 
     // Once user select an ans after 3s it will go to the next qn
-    Future.delayed(Duration(seconds: 3), () {
-      nextQuestion();
-    });
+    // Future.delayed(Duration(seconds: 3), () {
+    //   nextQuestion();
+    // });
   }
 
   void nextQuestion() {
@@ -112,19 +111,14 @@ class QuestionController extends GetxController
       // Once timer is finish go to the next qn
       _animationController.forward().whenComplete(nextQuestion);
     } else {
-      
-      if((_qnController.correctAns * 1)>=3){
-            Get.to(SecondScreen());
-
-      }else if((_qnController.correctAns * 1) ==2 ){
-            Get.to(FirstScreen());
-
-      }else{
-            Get.to(ScreenThree());
-
+      if ((_qnController.correctAns * 1) >= 3) {
+        Get.to(const AmezingScreen());
+      } else if ((_qnController.correctAns * 1) == 2) {
+        Get.to(const GoodJobScreen());
+      } else {
+        Get.to(const FailedScreen());
       }
       // Get package provide us simple way to naviigate another page
-  
     }
   }
 

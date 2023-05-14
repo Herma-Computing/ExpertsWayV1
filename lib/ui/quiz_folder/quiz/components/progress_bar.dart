@@ -5,7 +5,6 @@ import 'package:hexcolor/hexcolor.dart';
 import '../../../../services/controllers/question_controller.dart';
 import '../../../constants.dart';
 
-
 class ProgressBar extends StatelessWidget {
   const ProgressBar({
     Key? key,
@@ -42,15 +41,10 @@ class ProgressBar extends StatelessWidget {
                 ),
                 Positioned.fill(
                   child: Padding(
-                    padding:  EdgeInsets.symmetric(
-                        horizontal: kDefaultPadding / 2),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                            "${(controller.animation.value * 60).round()} sec"),
-                      ],
-                    ),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: kDefaultPadding / 2),
+                    child: Text(
+                        "${(controller.animation.value * 60).round()} sec"),
                   ),
                 ),
               ],
