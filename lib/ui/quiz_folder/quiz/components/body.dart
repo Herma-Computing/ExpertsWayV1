@@ -30,24 +30,24 @@ class Body extends StatelessWidget {
                   height: 10,
                 ),
                 ProgressBar(),
-                // CircleAvatar(
-                //   backgroundColor: HexColor('#26B0FF').withOpacity(0.8),
-                //   radius: 45,
-                //   child: Text(
-                //     '1:31',
-                //     style: TextStyle(
-                //         fontSize: 25,
-                //         color: Colors.white,
-                //         fontWeight: FontWeight.bold),
-                //   ),
-                // ),
-                              Text(
-                  "${_allquestionController.correctAns * 1}/${_allquestionController.questions.length * 1}",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline4!
-                      .copyWith(color: kSecondaryColor),
+                CircleAvatar(
+                  backgroundColor: HexColor('#26B0FF').withOpacity(0.8),
+                  radius: 45,
+                  child: Text(
+                    '1:30',
+                    style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
+                //               Text(
+                //    "${(_allquestionController.correctAns * 1) * 100 / 4}%",
+                //   style: Theme.of(context)
+                //       .textTheme
+                //       .headline4!
+                //       .copyWith(color: kSecondaryColor),
+                // ),
                 Expanded(
                   child: PageView.builder(
                     // Block swipe to next qn

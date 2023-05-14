@@ -7,7 +7,7 @@ import '../../../../models/Questions.dart';
 import '../../../../services/controllers/question_controller.dart';
 import '../../../constants.dart';
 import '../../../pages/navmenu/menu_dashboard_layout.dart';
-import '../../IntroPage/screeen2.dart';
+
 import 'option.dart';
 
 class QuestionCard extends StatelessWidget {
@@ -53,6 +53,8 @@ class QuestionCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               MaterialButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(22.0)),
                   color: Colors.white,
                   onPressed: () {
                     Navigator.push(
@@ -67,6 +69,8 @@ class QuestionCard extends StatelessWidget {
                     ),
                   )),
               MaterialButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(22.0)),
                   color: HexColor('#26B0FF').withOpacity(1),
                   onPressed: _controller.nextQuestion,
                   child: Text("Next")),

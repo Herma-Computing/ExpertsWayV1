@@ -7,9 +7,9 @@ import 'package:learncoding/ui/constants.dart';
 import '../../../services/controllers/question_controller.dart';
 
 
-class SecondScreen extends StatelessWidget {
+class AmezingScreen extends StatelessWidget {
   
-  const SecondScreen({Key? key}) : super(key: key);
+  const AmezingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class SecondScreen extends StatelessWidget {
                 backgroundColor: HexColor('#26B0FF').withOpacity(1),
                 radius: 45,
                 child:      Text(
-                  "${_qnController.correctAns * 1}/${_qnController.questions.length * 1}",
+                  "${(_qnController.correctAns * 1)*100/4}%",
                   style: Theme.of(context)
                       .textTheme
                       .headline4!

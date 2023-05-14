@@ -6,12 +6,12 @@ import 'package:hexcolor/hexcolor.dart';
 import '../../../services/controllers/question_controller.dart';
 import '../../constants.dart';
 
-class ScreenThree extends StatelessWidget {
-  const ScreenThree({Key? key}) : super(key: key);
+class FailedScreen extends StatelessWidget {
+  const FailedScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-           QuestionController _qnController = Get.put(QuestionController());
+    QuestionController _qnController = Get.put(QuestionController());
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -24,11 +24,11 @@ class ScreenThree extends StatelessWidget {
                   'assets/images/thirs.svg',
                 ),
               ),
-            CircleAvatar(
+              CircleAvatar(
                 backgroundColor: HexColor('#26B0FF').withOpacity(1),
                 radius: 45,
                 child: Text(
-                  "${_qnController.correctAns * 1}/${_qnController.questions.length * 1}",
+                  "${(_qnController.correctAns * 1) * 100 / 4}%",
                   style: Theme.of(context)
                       .textTheme
                       .headline4!
