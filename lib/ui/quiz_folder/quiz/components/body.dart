@@ -45,13 +45,7 @@ class Body extends StatelessWidget {
                     ),
                   ),
                 ),
-                //               Text(
-                //    "${(_allquestionController.correctAns * 1) * 100 / 4}%",
-                //   style: Theme.of(context)
-                //       .textTheme
-                //       .headline4!
-                //       .copyWith(color: kSecondaryColor),
-                // ),
+                
                 Expanded(
                   child: PageView.builder(
                     // Block swipe to next qn

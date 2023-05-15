@@ -8,8 +8,11 @@ class QuizProgressController extends GetxController{
 
 
 
-   final RxInt  _quizPregressBarLength=2.obs;
-  RxInt get quizProgressBarController=>_quizPregressBarLength;
-  quzizProgresBarIncrement()=>_quizPregressBarLength.value++;
+   double    _quizPregressBarLength=3.0;
+  double  get quizProgressBarController=>_quizPregressBarLength;
+  quzizProgresBarIncrement(){
+    _quizPregressBarLength++;
+    update();
+  }
 
 }

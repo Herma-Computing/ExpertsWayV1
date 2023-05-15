@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import '../../../../models/Questions.dart';
 import '../../../../services/controllers/question_controller.dart';
+import '../../../../services/controllers/quiz_progress_bar_controller.dart';
 import '../../../constants.dart';
 import '../../../pages/navmenu/menu_dashboard_layout.dart';
 
@@ -20,11 +20,12 @@ class QuestionCard extends StatelessWidget {
   final Question question;
 
   @override
-  Widget build(BuildContext context) {
-    QuestionController _controller = Get.put(QuestionController());
+  Widget build(BuildContext context) { //
+    QuestionController controller = Get.put(QuestionController());
+        QuizProgressController QuizProgressControllers = Get.put(QuizProgressController());
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-      padding: EdgeInsets.all(kDefaultPadding),
+      margin:const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      padding: const EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(25),
@@ -44,10 +45,10 @@ class QuestionCard extends StatelessWidget {
             (index) => Option(
               index: index,
               text: question.options[index],
-              press: () => _controller.checkAns(question, index),
+              press: () => controller.checkAns(question, index),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Row(
@@ -61,7 +62,7 @@ class QuestionCard extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MenuDashboardLayout()));
+                            builder: (context) => const MenuDashboardLayout()));
                   },
                   child: Text(
                     "Skip",
@@ -73,8 +74,13 @@ class QuestionCard extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(22.0)),
                   color: HexColor('#26B0FF').withOpacity(1),
-                  onPressed: _controller.nextQuestion,
-                  child: Text("Next")),
+                  onPressed: (){
+                      controller.nextQuestion;
+                      QuizProgressControllers.quizProgressBarController;
+                    
+                  },
+                
+                  child: const Text("Next")),
             ],
           )
         ],

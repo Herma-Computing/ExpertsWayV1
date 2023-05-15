@@ -38,13 +38,8 @@ class ProgressBar extends StatelessWidget {
 
                 LayoutBuilder(
                   builder: (context, constraints) => Container(
-                    // from 0 to 1 it takes 60s
-                    // width: Obx(
-                    //   () => Text(
-                    //     '${progresBarController.quizProgressBarController}',
-                    //     style: Theme.of(context).textTheme.headlineMedium,
-                    //   ),
-                    // ),
+                  
+                    width: progresBarController.quizProgressBarController ,
                     decoration: BoxDecoration(
                       color: HexColor('#26B0FF').withOpacity(1),
                       borderRadius: BorderRadius.circular(50),
