@@ -23,7 +23,7 @@ class AmezingScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 35, left: 35, top: 35),
                 child: SvgPicture.asset(
-                  'assets/images/thirs.svg',
+                  'assets/images/personal_goal.svg',
                 ),
               ),
               CircleAvatar(
@@ -33,7 +33,7 @@ class AmezingScreen extends StatelessWidget {
                   "${(_qnController.correctAns * 1)*100/4}%",
                   style: Theme.of(context)
                       .textTheme
-                      .headline4!
+                      .headlineMedium!
                       .copyWith(color: kSecondaryColor),
                 ),
               ),

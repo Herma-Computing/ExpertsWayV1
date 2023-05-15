@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-import 'package:flutter_svg/svg.dart';
-
 import '../../../../services/controllers/question_controller.dart';
-import '../../../constants.dart';
 import 'progress_bar.dart';
 import 'question_card.dart';
 

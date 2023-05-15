@@ -9,7 +9,7 @@ import '../../constants.dart';
 class ScoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    QuestionController _qnController = Get.put(QuestionController());
+    QuestionController qnController = Get.put(QuestionController());
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -17,24 +17,24 @@ class ScoreScreen extends StatelessWidget {
           SvgPicture.asset("assets/icons/bg.svg", fit: BoxFit.fill),
           Column(
             children: [
-              Spacer(flex: 3),
+              const Spacer(flex: 3),
               Text(
                 "Score",
                 style: Theme.of(context)
                     .textTheme
-                    .headline3!
+                    .displaySmall!
                     .copyWith(color: kSecondaryColor),
               ),
-              Spacer(),
+              const Spacer(),
               Text(
-                "${(_qnController.correctAns * 1) * 100 / 4}%",
-                // "${_qnController.correctAns * 1}/${_qnController.questions.length * 1}",
+                "${(qnController.correctAns * 1) * 100 / 4}%",
+                // "${qnController.correctAns * 1}/${qnController.questions.length * 1}",
                 style: Theme.of(context)
                     .textTheme
-                    .headline4!
+                    .headlineMedium!
                     .copyWith(color: kSecondaryColor),
               ),
-              Spacer(flex: 3),
+              const Spacer(flex: 3),
             ],
           )
         ],

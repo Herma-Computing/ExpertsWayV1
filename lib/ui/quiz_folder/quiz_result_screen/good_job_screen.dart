@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:learncoding/ui/constants.dart';
 
 import '../../../services/controllers/question_controller.dart';
 
@@ -22,7 +21,7 @@ class GoodJobScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 35, left: 35, top: 35),
                 child: SvgPicture.asset(
-                  'assets/images/thirs.svg',
+                  'assets/images/personal_goal.svg',
                 ),
               ),
               CircleAvatar(
@@ -32,7 +31,7 @@ class GoodJobScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     "${(_qnController.correctAns * 1) * 100 / 4}%",
-                    style: Theme.of(context).textTheme.headline4!.copyWith(
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                           color: Colors.white,
                           fontSize: 20,
                         ),
