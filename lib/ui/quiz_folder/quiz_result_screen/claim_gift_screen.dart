@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:learncoding/ui/constants.dart';
 
-import '../../../services/controllers/question_controller.dart';
-
-class AmezingScreen extends StatelessWidget {
-  const AmezingScreen({Key? key}) : super(key: key);
+class ClaimGiftScreen extends StatelessWidget {
+  const ClaimGiftScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    QuestionController _qnController = Get.put(QuestionController());
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -21,39 +16,59 @@ class AmezingScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 35, left: 35, top: 35),
                 child: SvgPicture.asset(
-                  'assets/images/claim_gift',
+                  'assets/images/claim_gift.svg',
                 ),
               ),
-              CircleAvatar(
-                backgroundColor: HexColor('#26B0FF').withOpacity(1),
-                radius: 45,
+              const Padding(
+                padding: EdgeInsets.only(left: 30, right: 2),
                 child: Text(
-                  "${(_qnController.correctAns * 1) * 100 / 4}%",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline4!
-                      .copyWith(color: kSecondaryColor),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Text(
-                  'A gift for a worthy of your skills',
+                  'A gift for a worthy ',
                   style: TextStyle(
-                      fontSize: 25,
+                      fontSize: 20,
                       color: Colors.black,
                       fontWeight: FontWeight.bold),
                 ),
               ),
+              const Text(
+                'of your skills',
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
+              ),
               Column(
                 children: [
-                  Text('You’ve received 25xp for all',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: HexColor('#2E2E2E').withOpacity(0.5),
-                          fontWeight: FontWeight.normal)),
+                  RichText(
+                      text: TextSpan(children: [
+                    TextSpan(
+                        text: 'You’ve received',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: HexColor('#2E2E2E').withOpacity(0.5),
+                            fontWeight: FontWeight.normal)),
+                    TextSpan(
+                        text: '25xp',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: HexColor('#26B0FF'),
+                            fontWeight: FontWeight.normal)),
+                    TextSpan(
+                        text: 'for all',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: HexColor('#2E2E2E').withOpacity(0.5),
+                            fontWeight: FontWeight.normal)),
+                  ])),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+                  //   child: Text('You’ve received 25xp for all',
+                  //       style: TextStyle(
+                  //           fontSize: 16,
+                  //           color: HexColor('#2E2E2E').withOpacity(0.5),
+                  //           fontWeight: FontWeight.normal)),
+                  // ),
                   Padding(
-                    padding: const EdgeInsets.all(9.0),
+                    padding: const EdgeInsets.only(left: 10),
                     child: Text('your hard work. Don’t spend it',
                         style: TextStyle(
                             fontSize: 16,
@@ -68,12 +83,7 @@ class AmezingScreen extends StatelessWidget {
                 ],
               ),
               InkWell(
-                onTap: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (BuildContext context) {
-                  //   return const Screenfour();
-                  // }));
-                },
+                onTap: () {},
                 child: Container(
                   margin: const EdgeInsets.all(42),
                   width: 208.47,

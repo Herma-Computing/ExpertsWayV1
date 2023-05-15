@@ -4,7 +4,6 @@ import 'package:hexcolor/hexcolor.dart';
 
 import '../../../../models/Questions.dart';
 import '../../../../services/controllers/question_controller.dart';
-import '../../../../services/controllers/quiz_progress_bar_controller.dart';
 import '../../../constants.dart';
 import '../../../pages/navmenu/menu_dashboard_layout.dart';
 
@@ -23,8 +22,6 @@ class QuestionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     //
     QuestionController controller = Get.put(QuestionController());
-    QuizProgressController QuizProgressControllers =
-        Get.put(QuizProgressController());
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       padding: const EdgeInsets.all(kDefaultPadding),
@@ -66,7 +63,7 @@ class QuestionCard extends StatelessWidget {
                     height: MediaQuery.of(context).size.width * 0.1,
                     child: ElevatedButton(
                       onPressed: () {
-                       Get.to(MenuDashboardLayout());
+                       Get.to(const MenuDashboardLayout());
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
@@ -78,7 +75,7 @@ class QuestionCard extends StatelessWidget {
                         elevation: 1.0,
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding:const  EdgeInsets.all(5.0),
                         child: Text(
                           'Skip',
                           style: TextStyle(
@@ -105,7 +102,7 @@ class QuestionCard extends StatelessWidget {
                         elevation: 5.0,
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding:const  EdgeInsets.all(5.0),
                         child: Text(
                           'Next',
                           style: TextStyle(

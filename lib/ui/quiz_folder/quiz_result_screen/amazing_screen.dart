@@ -2,18 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:learncoding/ui/constants.dart';
 
 import '../../../services/controllers/question_controller.dart';
 
-
 class AmezingScreen extends StatelessWidget {
-  
   const AmezingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-       QuestionController _qnController = Get.put(QuestionController());
+    QuestionController qnController = Get.put(QuestionController());
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -28,17 +25,20 @@ class AmezingScreen extends StatelessWidget {
               ),
               CircleAvatar(
                 backgroundColor: HexColor('#26B0FF').withOpacity(1),
-                radius: 45,
-                child:      Text(
-                  "${(_qnController.correctAns * 1)*100/4}%",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineMedium!
-                      .copyWith(color: kSecondaryColor),
+                radius: 40,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "${(qnController.numOfCorrectAns * 1) * 100 / 4}%",
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                  ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(18.0),
+              const Padding(
+                padding: EdgeInsets.all(18.0),
                 child: Text(
                   'AMAZING',
                   style: TextStyle(
@@ -55,7 +55,7 @@ class AmezingScreen extends StatelessWidget {
                           color: HexColor('#2E2E2E').withOpacity(0.5),
                           fontWeight: FontWeight.normal)),
                   Padding(
-                    padding: const EdgeInsets.all(9.0),
+                    padding: const EdgeInsets.all(1.0),
                     child: Text(' your goals  Keep this up and you’ll ',
                         style: TextStyle(
                             fontSize: 16,

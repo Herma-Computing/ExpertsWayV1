@@ -41,8 +41,8 @@ class Option extends StatelessWidget {
             onTap: press,
             child: Container(
               height: 40,
-              margin: EdgeInsets.only(top: kDefaultPadding),
-              padding: EdgeInsets.all(kDefaultPadding),
+              margin:const  EdgeInsets.only(top: kDefaultPadding),
+              padding:const  EdgeInsets.all(kDefaultPadding),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(15),
@@ -52,7 +52,7 @@ class Option extends StatelessWidget {
                 children: [
                   Text(
                     "${index + 1}. $text",
-                    style: TextStyle(color: Colors.grey, fontSize: 16),
+                    style:const  TextStyle(color: Colors.grey, fontSize: 16),
                   ),
                   Container(
                     height: 16,
