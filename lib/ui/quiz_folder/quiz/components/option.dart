@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 import '../../../../services/controllers/question_controller.dart';
 import '../../../constants.dart';
 
-
 class Option extends StatelessWidget {
   const Option({
-     Key? key,
+    Key? key,
     required this.text,
     required this.index,
     required this.press,
@@ -24,7 +24,7 @@ class Option extends StatelessWidget {
           Color getTheRightColor() {
             if (qnController.isAnswered) {
               if (index == qnController.correctAns) {
-                return kGreenColor;
+                return HexColor('#26B0FF').withOpacity(1);
               } else if (index == qnController.selectedAns &&
                   qnController.selectedAns != qnController.correctAns) {
                 return kRedColor;
@@ -40,11 +40,11 @@ class Option extends StatelessWidget {
           return InkWell(
             onTap: press,
             child: Container(
-              height: 60,
+              height: 40,
               margin: EdgeInsets.only(top: kDefaultPadding),
               padding: EdgeInsets.all(kDefaultPadding),
               decoration: BoxDecoration(
-                border: Border.all(color: getTheRightColor()),
+                border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(15),
               ),
               child: Row(
@@ -52,7 +52,7 @@ class Option extends StatelessWidget {
                 children: [
                   Text(
                     "${index + 1}. $text",
-                    style: TextStyle(color: getTheRightColor(), fontSize: 16),
+                    style: TextStyle(color: Colors.grey, fontSize: 16),
                   ),
                   Container(
                     height: 16,

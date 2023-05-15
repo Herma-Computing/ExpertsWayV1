@@ -10,14 +10,13 @@ class GoodJobScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    QuestionController _qnController = Get.put(QuestionController());
+    QuestionController qnController = Get.put(QuestionController());
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
             child: SingleChildScrollView(
           child: Column(
             children: [
-             
               Padding(
                 padding: const EdgeInsets.only(right: 35, left: 35, top: 35),
                 child: SvgPicture.asset(
@@ -26,27 +25,44 @@ class GoodJobScreen extends StatelessWidget {
               ),
               CircleAvatar(
                 backgroundColor: HexColor('#26B0FF').withOpacity(1),
-                radius: 45,
+                radius: 40,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "${(_qnController.correctAns * 1) * 100 / 4}%",
+                    "${(qnController.correctAns * 1) * 100 / 4}%",
                     style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 16,
                         ),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Text('Good Job'),
+              const Padding(
+                padding: EdgeInsets.all(18.0),
+                child: Text(
+                  'Good Job',
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: const Text(
-                    'Good Job, You’re making progress but we believe that +'
-                    ' you can do even more. Don’t Give Up!!'),
+                padding: const EdgeInsets.only(left: 28, top: 8, right: 18),
+                child: Text(
+                    'Good Job, You’re making progress but we believe that you can do  ',
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: HexColor('#2E2E2E').withOpacity(0.5),
+                        fontWeight: FontWeight.normal)),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 28, top: 1, right: 18),
+                child: Text('even more. Don’t Give Up!!',
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: HexColor('#2E2E2E').withOpacity(0.5),
+                        fontWeight: FontWeight.normal)),
               ),
               Container(
                 margin: const EdgeInsets.all(42),

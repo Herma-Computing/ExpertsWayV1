@@ -39,7 +39,7 @@ class ProgressBar extends StatelessWidget {
                 LayoutBuilder(
                   builder: (context, constraints) => Container(
                   
-                    width: progresBarController.quizProgressBarController ,
+                    width: progresBarController.quizPregressBarLength.value ,
                     decoration: BoxDecoration(
                       color: HexColor('#26B0FF').withOpacity(1),
                       borderRadius: BorderRadius.circular(50),

@@ -1,13 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 
 import '../../models/Questions.dart';
 
 import '../../ui/quiz_folder/quiz_result_screen/amazing_screen.dart';
 import '../../ui/quiz_folder/quiz_result_screen/failed_screen.dart';
 import '../../ui/quiz_folder/quiz_result_screen/good_job_screen.dart';
-
 
 QuestionController _qnController = Get.put(QuestionController());
 
@@ -46,7 +44,7 @@ class QuestionController extends GetxController
   int get selectedAns => this._selectedAns;
 
   // for more about obs please check documentation
-  RxInt _questionNumber = 1.obs;
+  final RxInt _questionNumber = 1.obs;
   RxInt get questionNumber => this._questionNumber;
 
   int _numOfCorrectAns = 0;
@@ -81,6 +79,7 @@ class QuestionController extends GetxController
   }
 
   void checkAns(Question question, int selectedIndex) {
+    print(selectedIndex);
     // because once user press any option then it will run
     _isAnswered = true;
     _correctAns = question.answer;
@@ -89,7 +88,7 @@ class QuestionController extends GetxController
     if (_correctAns == _selectedAns) _numOfCorrectAns++;
 
     // It will stop the counter
-    _animationController.stop();
+    // _animationController.stop();
     update();
 
     // Once user select an ans after 3s it will go to the next qn
@@ -100,22 +99,16 @@ class QuestionController extends GetxController
 
   void nextQuestion() {
     if (_questionNumber.value != _questions.length) {
+      print(_qnController.correctAns);
       _isAnswered = false;
       _pageController.nextPage(
           duration: Duration(milliseconds: 250), curve: Curves.ease);
-
-      // Reset the counter
-      _animationController.reset();
-
-      // Then start it again
-      // Once timer is finish go to the next qn
-      _animationController.forward().whenComplete(nextQuestion);
     } else {
       if ((_qnController.correctAns * 1) >= 3) {
         Get.to(const AmezingScreen());
       } else if ((_qnController.correctAns * 1) == 2) {
         Get.to(const GoodJobScreen());
-      } else {
+      } else if ((_qnController.correctAns * 1) < 2) {
         Get.to(const FailedScreen());
       }
       // Get package provide us simple way to naviigate another page

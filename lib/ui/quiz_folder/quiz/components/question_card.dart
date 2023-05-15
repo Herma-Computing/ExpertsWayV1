@@ -20,70 +20,105 @@ class QuestionCard extends StatelessWidget {
   final Question question;
 
   @override
-  Widget build(BuildContext context) { //
+  Widget build(BuildContext context) {
+    //
     QuestionController controller = Get.put(QuestionController());
-        QuizProgressController QuizProgressControllers = Get.put(QuizProgressController());
+    QuizProgressController QuizProgressControllers =
+        Get.put(QuizProgressController());
     return Container(
-      margin:const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       padding: const EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(25),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text(
-            question.question,
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge!
-                .copyWith(color: kBlackColor),
-          ),
-          ...List.generate(
-            question.options.length,
-            (index) => Option(
-              index: index,
-              text: question.options[index],
-              press: () => controller.checkAns(question, index),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              question.question,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(color: kBlackColor),
             ),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              MaterialButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(22.0)),
-                  color: Colors.white,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MenuDashboardLayout()));
-                  },
-                  child: Text(
-                    "Skip",
-                    style: TextStyle(
-                      color: HexColor('#26B0FF').withOpacity(1),
+            const SizedBox(
+              height: 25,
+            ),
+            ...List.generate(
+              question.options.length,
+              (index) => Option(
+                index: index,
+                text: question.options[index],
+                press: () => controller.checkAns(question, index),
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    height: MediaQuery.of(context).size.width * 0.1,
+                    child: ElevatedButton(
+                      onPressed: () {
+                       Get.to(MenuDashboardLayout());
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        side:
+                            BorderSide(width: 2.0, color: HexColor('#26B0FF')),
+                        elevation: 1.0,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Text(
+                          'Skip',
+                          style: TextStyle(
+                              fontSize: 15, color: HexColor('#26B0FF')),
+                        ),
+                      ),
                     ),
-                  )),
-              MaterialButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(22.0)),
-                  color: HexColor('#26B0FF').withOpacity(1),
-                  onPressed: (){
-                      controller.nextQuestion;
-                      QuizProgressControllers.quizProgressBarController;
-                    
-                  },
-                
-                  child: const Text("Next")),
-            ],
-          )
-        ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 70),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    height: MediaQuery.of(context).size.width * 0.1,
+                    child: ElevatedButton(
+                    onPressed: controller.nextQuestion,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: HexColor('#26B0FF'),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        side:
+                            BorderSide(width: 2.0, color: HexColor('#26B0FF')),
+                        elevation: 5.0,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Text(
+                          'Next',
+                          style: TextStyle(
+                              fontSize: 15, color: HexColor('#FFFFFF')),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
