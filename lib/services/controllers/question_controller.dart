@@ -1,5 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:get/get.dart';
+import 'package:learncoding/services/controllers/quiz_progress_bar_controller.dart';
+
 
 import '../../models/Questions.dart';
 
@@ -8,6 +12,7 @@ import '../../ui/quiz_folder/quiz_result_screen/failed_screen.dart';
 import '../../ui/quiz_folder/quiz_result_screen/good_job_screen.dart';
 
 QuestionController _qnController = Get.put(QuestionController());
+QuizProgressController progressController = Get.put(QuizProgressController());
 
 // We use get package for our state management
 
@@ -89,11 +94,17 @@ class QuestionController extends GetxController
     update();
   }
 
-  void nextQuestion() {
+  nextQuestion() {
     if (_questionNumber.value != _questions.length) {
-      _isAnswered = false;
-      _pageController.nextPage(
-          duration: const Duration(milliseconds: 250), curve: Curves.ease);
+      if (isAnswered == false) {
+        return Get.snackbar("you must select one answer",
+            "procedding without answer the quetion is not allowed");
+      } else {
+        _isAnswered = false;
+        progressController.increment();
+        _pageController.nextPage(
+            duration: const Duration(milliseconds: 250), curve: Curves.ease);
+      }
     } else {
       if ((_qnController.numOfCorrectAns * 1) >= 3) {
         Get.to(() => const AmezingScreen());

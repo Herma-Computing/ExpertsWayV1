@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import '../../../../models/Questions.dart';
 import '../../../../services/controllers/question_controller.dart';
+
 import '../../../constants.dart';
 import '../../../pages/navmenu/menu_dashboard_layout.dart';
 
@@ -22,6 +24,7 @@ class QuestionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     //
     QuestionController controller = Get.put(QuestionController());
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       padding: const EdgeInsets.all(kDefaultPadding),
@@ -63,7 +66,7 @@ class QuestionCard extends StatelessWidget {
                     height: MediaQuery.of(context).size.width * 0.1,
                     child: ElevatedButton(
                       onPressed: () {
-                       Get.to(const MenuDashboardLayout());
+                        Get.to(const MenuDashboardLayout());
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
@@ -75,7 +78,7 @@ class QuestionCard extends StatelessWidget {
                         elevation: 1.0,
                       ),
                       child: Padding(
-                        padding:const  EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Text(
                           'Skip',
                           style: TextStyle(
@@ -91,7 +94,7 @@ class QuestionCard extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.3,
                     height: MediaQuery.of(context).size.width * 0.1,
                     child: ElevatedButton(
-                    onPressed: controller.nextQuestion,
+                      onPressed: controller.nextQuestion,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: HexColor('#26B0FF'),
                         shape: RoundedRectangleBorder(
@@ -102,7 +105,7 @@ class QuestionCard extends StatelessWidget {
                         elevation: 5.0,
                       ),
                       child: Padding(
-                        padding:const  EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Text(
                           'Next',
                           style: TextStyle(

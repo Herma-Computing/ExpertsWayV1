@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:learncoding/global/globals.dart' as globals;
 import 'package:learncoding/routes/router.dart' as router;
+
 import 'package:learncoding/ui/quiz_folder/quiz_result_screen/good_job_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
@@ -127,12 +128,8 @@ class SplashScreen extends StatelessWidget {
       animationDuration: const Duration(milliseconds: 1500),
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       pageTransitionType: PageTransitionType.fade,
-      nextScreen:
-          name == null ? const Onboarding() : GoodJobScreen(),
-          // MenuDashboardLayout(),
-          
-          
-          //const 
+      nextScreen: name == null ? const Onboarding() : const MenuDashboardLayout(),
+    
     );
   }
 }

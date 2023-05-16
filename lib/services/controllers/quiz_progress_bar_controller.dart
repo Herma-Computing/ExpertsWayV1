@@ -1,10 +1,7 @@
 import 'package:get/get.dart';
 
 class QuizProgressController extends GetxController {
-  RxDouble quizPregressBarLength = 100.0.obs;
+  final count = 0.0.obs;
 
-  // quzizProgresBarIncrement(){
-  //   _quizPregressBarLength++;
-  //   update();
-  // }
+  increment() => count.value = count.value + 80;
 }

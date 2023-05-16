@@ -728,6 +728,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
+  simple_timer:
+    dependency: "direct main"
+    description:
+      name: simple_timer
+      sha256: "780754451f1969ffba2675ed1acb9536794a6e867cd4e80f3d8724e53370c200"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -765,6 +773,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  stop_watch_timer:
+    dependency: "direct main"
+    description:
+      name: stop_watch_timer
+      sha256: eb690e4f6d983ba12ddfbf51a5d489fdba8b64982b9651cb538650888cec2886
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   stream_channel:
     dependency: transitive
     description:
@@ -813,6 +829,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
+  toast:
+    dependency: "direct main"
+    description:
+      name: toast
+      sha256: "12433091e3e5a25b3a25f670126e42547c9ade135de30ad9ace45d1ddccd57c9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.0"
   tuple:
     dependency: transitive
     description:

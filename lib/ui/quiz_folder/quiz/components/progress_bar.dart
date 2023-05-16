@@ -5,10 +5,19 @@ import 'package:hexcolor/hexcolor.dart';
 import '../../../../services/controllers/question_controller.dart';
 import '../../../../services/controllers/quiz_progress_bar_controller.dart';
 
-class ProgressBar extends StatelessWidget {
-  const ProgressBar({
+class ProgressBar extends StatefulWidget {
+
+
+ ProgressBar({ 
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<ProgressBar> createState() => _ProgressBarState();
+}
+
+class _ProgressBarState extends State<ProgressBar> {
+   
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +40,7 @@ class ProgressBar extends StatelessWidget {
               children: [
                 LayoutBuilder(
                   builder: (context, constraints) => Container(
-                    width: progresBarController.quizPregressBarLength.value,
+                    width: progresBarController.count.value,
                     decoration: BoxDecoration(
                       color: HexColor('#26B0FF').withOpacity(1),
                       borderRadius: BorderRadius.circular(50),
