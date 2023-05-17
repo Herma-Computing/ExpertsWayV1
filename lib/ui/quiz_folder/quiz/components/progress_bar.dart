@@ -6,9 +6,7 @@ import '../../../../services/controllers/question_controller.dart';
 import '../../../../services/controllers/quiz_progress_bar_controller.dart';
 
 class ProgressBar extends StatefulWidget {
-
-
- ProgressBar({ 
+  ProgressBar({
     Key? key,
   }) : super(key: key);
 
@@ -17,8 +15,6 @@ class ProgressBar extends StatefulWidget {
 }
 
 class _ProgressBarState extends State<ProgressBar> {
-   
-
   @override
   Widget build(BuildContext context) {
     final QuizProgressController progresBarController =
