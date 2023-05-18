@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:learncoding/services/controllers/quiz_progress_bar_controller.dart';
 
-
 import '../../models/Questions.dart';
 
 import '../../ui/quiz_folder/quiz_result_screen/amazing_screen.dart';
@@ -18,13 +17,6 @@ QuizProgressController progressController = Get.put(QuizProgressController());
 
 class QuestionController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  // Lets animated our progress bar
-
-  late AnimationController _animationController;
-  late Animation _animation;
-  // so that we can access our animation outside
-  Animation get animation => _animation;
-
   late PageController _pageController;
   PageController get pageController => _pageController;
 
@@ -58,19 +50,6 @@ class QuestionController extends GetxController
   // called immediately after the widget is allocated memory
   @override
   void onInit() {
-    // Our animation duration is 60 s
-    // so our plan is to fill the progress bar within 60s
-    _animationController =
-        AnimationController(duration: const Duration(seconds: 60), vsync: this);
-    _animation = Tween<double>(begin: 0, end: 1).animate(_animationController)
-      ..addListener(() {
-        // update like setState
-        update();
-      });
-
-    // start our animation
-    // Once 60s is completed go to the next qn
-    _animationController.forward().whenComplete(nextQuestion);
     _pageController = PageController();
     super.onInit();
   }
@@ -79,7 +58,7 @@ class QuestionController extends GetxController
   @override
   void onClose() {
     super.onClose();
-    _animationController.dispose();
+
     _pageController.dispose();
   }
 
@@ -89,12 +68,12 @@ class QuestionController extends GetxController
     _correctAns = question.answer;
     _selectedAns = selectedIndex;
 
-    if (_correctAns == _selectedAns) _numOfCorrectAns++;
-
     update();
   }
 
   nextQuestion() {
+    if (correctAns == selectedAns) _numOfCorrectAns++;
+    update();
     if (_questionNumber.value != _questions.length) {
       if (isAnswered == false) {
         return Get.snackbar("you must select one answer",

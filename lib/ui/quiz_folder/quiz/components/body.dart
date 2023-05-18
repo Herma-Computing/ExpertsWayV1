@@ -60,8 +60,11 @@ class _BodyState extends State<Body> {
                       initialData: _stopWatchTimer.rawTime.value,
                       builder: (context, snap) {
                         final value = snap.data!;
-                        final displayTime = StopWatchTimer.getDisplayTime(value,
-                            hours: _isHours);
+                        final displayTime = StopWatchTimer.getDisplayTime(
+                          value,
+                          hours: _isHours,
+                          milliSecond: false,
+                        );
                         return Column(
                           children: <Widget>[
                             Padding(
@@ -69,9 +72,9 @@ class _BodyState extends State<Body> {
                               child: Center(
                                 child: Text(
                                   displayTime,
-                                  style:  TextStyle(
+                                  style: TextStyle(
                                       fontSize: 14,
-                                      color: HexColor('#26B0FF'), 
+                                      color: HexColor('#26B0FF'),
                                       fontFamily: 'Helvetica',
                                       fontWeight: FontWeight.bold),
                                 ),
