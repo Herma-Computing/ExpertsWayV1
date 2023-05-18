@@ -23,7 +23,8 @@ class Option extends StatelessWidget {
         builder: (qnController) {
           Color getTheRightColor() {
             if (qnController.isAnswered) {
-              if (index == qnController.correctAns) {
+              if (index == qnController.selectedAns &&
+                  index == qnController.correctAns) {
                 return HexColor('#26B0FF').withOpacity(1);
               } else if (index == qnController.selectedAns &&
                   qnController.selectedAns != qnController.correctAns) {
@@ -34,7 +35,7 @@ class Option extends StatelessWidget {
           }
 
           IconData getTheRightIcon() {
-            return getTheRightColor() == kRedColor ? Icons.close : Icons.done;
+            return Icons.done;
           }
 
           return InkWell(
@@ -62,7 +63,6 @@ class Option extends StatelessWidget {
                           ? Colors.transparent
                           : getTheRightColor(),
                       borderRadius: BorderRadius.circular(50),
-                      border: Border.all(color: getTheRightColor()),
                     ),
                     child: getTheRightColor() == kGrayColor
                         ? null

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 const kSecondaryColor = Color(0xFF8B94BC);
 const kGreenColor = Color.fromARGB(255, 21, 255, 0);
-const kRedColor = Color.fromARGB(255, 194, 9, 9);
+
+final kRedColor = HexColor('#26B0FF').withOpacity(1);
 const kGrayColor = Color(0xFFC1C1C1);
 const kBlackColor = Color(0xFF101010);
 const kPrimaryGradient = LinearGradient(
