@@ -1,7 +1,7 @@
 import 'dart:ffi';
 import 'dart:math';
 import 'package:another_flushbar/flushbar.dart';
-import 'package:learncoding/api/shared_preference/shared_preference.dart';
+
 import 'package:learncoding/models/lesson.dart';
 import 'package:learncoding/models/user.dart';
 import 'package:learncoding/theme/box_icons_icons.dart';
@@ -149,8 +149,8 @@ class _LessonState extends State<LessonPage> {
   }
 
   Future init() async {
-    User user = await UserPreferences.getuser('image', 'name');
-    String? name = user.name;
+    // User user = await UserPreferences.getuser('image', 'name');
+    // String? name = user.name;
     this.name = name;
   }
 

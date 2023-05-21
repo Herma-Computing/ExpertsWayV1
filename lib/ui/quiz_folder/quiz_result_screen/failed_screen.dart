@@ -29,7 +29,7 @@ class FailedScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "${(qnController.numOfCorrectAns * 100)  / 4}%",
+                    "${(qnController.numOfCorrectAns * 100)  / 3}%",
                     style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                           color: Colors.white,
                           fontSize: 16,
