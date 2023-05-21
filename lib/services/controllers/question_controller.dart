@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:learncoding/services/controllers/quiz_progress_bar_controller.dart';
 
-
 import '../../models/quiz_models.dart';
 import '../../ui/quiz_folder/quiz_result_screen/amazing_screen.dart';
 import '../../ui/quiz_folder/quiz_result_screen/failed_screen.dart';
@@ -56,7 +55,7 @@ class QuestionController extends GetxController
   void checkAns(QuizModle question, int selectedIndex) {
     // because once user press any option then it will run
     _isAnswered = true;
-    _correctAns = question.correctAnswer[selectedIndex];
+    _correctAns = question.correctAnswer[0];
     _selectedAns = selectedIndex;
 
     update();

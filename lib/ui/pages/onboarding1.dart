@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 //import '../quiz_folder/quiz/quiz_screen.dart';
 
@@ -189,8 +192,18 @@ class OnboardingState extends State<Onboarding> {
     // }
 
     // ignore: use_build_context_synchronously
-    Navigator.of(context).pushReplacement(
-         MaterialPageRoute(builder: (context) => (QuizScreen())));
+    try {
+      final result = await InternetAddress.lookup('example.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+         Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => (QuizScreen())));
+      }
+    } on SocketException catch (_) {
+              return Get.snackbar("you are Offline",
+          "You must connect to the internet to procedd to quiz page");
+     
+    }
+   
   //  MaterialPageRoute(builder: (context) => (const MenuDashboardLayout())));
   }
 
