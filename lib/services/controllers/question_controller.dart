@@ -4,8 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:learncoding/services/controllers/quiz_progress_bar_controller.dart';
 
-import '../../models/Questions.dart';
 
+import '../../models/quiz_models.dart';
 import '../../ui/quiz_folder/quiz_result_screen/amazing_screen.dart';
 import '../../ui/quiz_folder/quiz_result_screen/failed_screen.dart';
 import '../../ui/quiz_folder/quiz_result_screen/good_job_screen.dart';
@@ -17,19 +17,10 @@ QuizProgressController progressController = Get.put(QuizProgressController());
 
 class QuestionController extends GetxController
     with GetSingleTickerProviderStateMixin {
+  List<QuizModle> quizmodelList = [];
   late PageController _pageController;
   PageController get pageController => _pageController;
-
-  final List<Question> _questions = sample_data
-      .map(
-        (question) => Question(
-            id: question['id'],
-            question: question['question'],
-            options: question['options'],
-            answer: question['answer_index']),
-      )
-      .toList();
-  List<Question> get questions => _questions;
+  List<QuizModle> get ListQuizModle => quizmodelList;
 
   bool _isAnswered = false;
   bool get isAnswered => _isAnswered;
@@ -37,8 +28,8 @@ class QuestionController extends GetxController
   int _correctAns = 0;
   int get correctAns => _correctAns;
 
-  late int _selectedAns;
-  int get selectedAns => _selectedAns;
+  int? _selectedAns;
+  int? get selectedAns => _selectedAns;
 
   // for more about obs please check documentation
   final RxInt _questionNumber = 1.obs;
@@ -62,19 +53,19 @@ class QuestionController extends GetxController
     _pageController.dispose();
   }
 
-  void checkAns(Question question, int selectedIndex) {
+  void checkAns(QuizModle question, int selectedIndex) {
     // because once user press any option then it will run
     _isAnswered = true;
-    _correctAns = question.answer;
+    _correctAns = question.correctAnswer[selectedIndex];
     _selectedAns = selectedIndex;
 
     update();
   }
 
-  nextQuestion() {
+  nextQuestion(List<QuizModle> question) {
     if (correctAns == selectedAns) _numOfCorrectAns++;
     update();
-    if (_questionNumber.value != _questions.length) {
+    if (_questionNumber.value != question.length) {
       if (isAnswered == false) {
         return Get.snackbar("you must select one answer",
             "procedding without answer the quetion is not allowed");

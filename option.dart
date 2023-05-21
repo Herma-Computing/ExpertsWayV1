@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:learncoding/services/controllers/question_controller.dart';
+import 'package:learncoding/ui/constants.dart';
 
-import '../../../../services/controllers/question_controller.dart';
-import '../../../constants.dart';
+
 
 class Option extends StatelessWidget {
   const Option({
@@ -53,7 +54,7 @@ class Option extends StatelessWidget {
                 children: [
                   Text(
                     "${index + 1}. $text",
-                    style: const TextStyle(color: Colors.grey, fontSize: 13),
+                    style: const TextStyle(color: Colors.grey, fontSize: 16),
                   ),
                   Container(
                     height: 16,

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:learncoding/main.dart';
 import 'package:learncoding/ui/pages/help.dart';
-import 'package:learncoding/api/google_signin_api.dart';
+
 import 'package:learncoding/utils/color.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,7 +42,7 @@ class _SettingsState extends State<Settings> {
     await pre.remove('name');
     await pre.remove('image');
     pre.clear();
-    GoogleSignInApi.logout();
+    // GoogleSignInApi.logout();
 
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => const RestartWidget(child: (MyApp()))));
