@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
+import '../../../../models/quiz_models.dart';
+import '../../../../services/api_controller.dart';
 import '../../../../services/controllers/question_controller.dart';
 import 'progress_bar.dart';
 import 'question_card.dart';
@@ -86,16 +88,58 @@ class _BodyState extends State<Body> {
                     ),
                   ),
                 ),
-                Expanded(
-                  child: PageView.builder(
-                    // Block swipe to next qn
-                    physics: const NeverScrollableScrollPhysics(),
-                    controller: allquestionController.pageController,
-                    onPageChanged: allquestionController.updateTheQnNum,
-                    itemCount: allquestionController.questions.length,
-                    itemBuilder: (context, index) => QuestionCard(
-                        question: allquestionController.questions[index]),
-                  ),
+                FutureBuilder<List<QuizModle>>(
+                  future: ApiProvider().retrieveQuiz(),
+                  builder: (
+                    BuildContext context,
+                    AsyncSnapshot<List<QuizModle>> snapshot,
+                  ) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 100),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            backgroundColor: Colors.black26,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              HexColor('#26B0FF').withOpacity(1), //<-- SEE HERE
+                            ),
+                          ),
+                        ),
+                      );
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.done) {
+                      if (snapshot.hasError) {
+                        // if there is no internet connection the code excutes here,
+                        // you must handle internet connection
+                        print(snapshot.error);
+                        return const Padding(
+                          padding: EdgeInsets.all(38.0),
+                          child: Text(
+                            "you don't have internet conneection or low internet connection problem",
+                            style: TextStyle(fontSize: 15),
+                          ),
+                        );
+                      } else if (snapshot.hasData) {
+                        return Expanded(
+                          child: PageView.builder(
+                              // Block swipe to next qn
+                              physics: const NeverScrollableScrollPhysics(),
+                              controller: allquestionController.pageController,
+                              onPageChanged:
+                                  allquestionController.updateTheQnNum,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (context, index) => QuestionCard(
+                                    question: snapshot.data![index],
+                                    listofQuizModle: snapshot.data!,
+                                  )),
+                        );
+                      } else {
+                        return const Text('Empty data');
+                      }
+                    } else {
+                      return Text('State: ${snapshot.connectionState}');
+                    }
+                  },
                 ),
               ],
             ),

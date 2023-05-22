@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-import '../../../../models/Questions.dart';
+import '../../../../models/quiz_models.dart';
 import '../../../../services/controllers/question_controller.dart';
 
 import '../../../constants.dart';
@@ -16,9 +16,11 @@ class QuestionCard extends StatelessWidget {
     Key? key,
     // it means we have to pass this
     required this.question,
+    required this.listofQuizModle,
   }) : super(key: key);
 
-  final Question question;
+  final QuizModle question;
+  final List<QuizModle> listofQuizModle;
 
   @override
   Widget build(BuildContext context) {
@@ -38,19 +40,19 @@ class QuestionCard extends StatelessWidget {
           children: [
             Text(
               question.question,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge!
-                  .copyWith(color: kBlackColor),
+              style: const TextStyle(
+                color: kBlackColor,
+                fontSize: 13,
+              ),
             ),
             const SizedBox(
               height: 25,
             ),
             ...List.generate(
-              question.options.length,
+              question.answerOptions.length,
               (index) => Option(
                 index: index,
-                text: question.options[index],
+                text: question.answerOptions[index],
                 press: () => controller.checkAns(question, index),
               ),
             ),
@@ -94,7 +96,10 @@ class QuestionCard extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.3,
                     height: MediaQuery.of(context).size.width * 0.1,
                     child: ElevatedButton(
-                      onPressed: controller.nextQuestion,
+                     
+                       onPressed: (){
+                        controller.nextQuestion(listofQuizModle);
+                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: HexColor('#26B0FF'),
                         shape: RoundedRectangleBorder(
