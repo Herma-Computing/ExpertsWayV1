@@ -38,7 +38,7 @@ class Option extends StatelessWidget {
             return Icons.done;
           }
 
-          return InkWell(
+          return text !=""?InkWell(
             onTap: press,
             child: Container(
               height: 40,
@@ -71,7 +71,7 @@ class Option extends StatelessWidget {
                 ],
               ),
             ),
-          );
+          ):Container(height: 0,width: 0,);
         });
   }
 }

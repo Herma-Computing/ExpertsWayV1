@@ -65,6 +65,7 @@ class ApiProvider {
       quizModleList = (response.data['quiz'] as List)
           .map((i) => QuizModle.fromJson(i))
           .toList();
+          
       return quizModleList;
     } else {
       throw Exception('Failed to load course');

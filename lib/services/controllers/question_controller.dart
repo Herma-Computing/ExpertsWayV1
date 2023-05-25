@@ -9,7 +9,6 @@ import '../../ui/quiz_folder/quiz_result_screen/amazing_screen.dart';
 import '../../ui/quiz_folder/quiz_result_screen/failed_screen.dart';
 import '../../ui/quiz_folder/quiz_result_screen/good_job_screen.dart';
 
-QuestionController _qnController = Get.put(QuestionController());
 QuizProgressController progressController = Get.put(QuizProgressController());
 
 // We use get package for our state management
@@ -17,9 +16,10 @@ QuizProgressController progressController = Get.put(QuizProgressController());
 class QuestionController extends GetxController
     with GetSingleTickerProviderStateMixin {
   List<QuizModle> quizmodelList = [];
+  List<QuizModle> get totalQuiz => quizmodelList;
+
   late PageController _pageController;
   PageController get pageController => _pageController;
-  List<QuizModle> get ListQuizModle => quizmodelList;
 
   bool _isAnswered = false;
   bool get isAnswered => _isAnswered;
@@ -52,6 +52,11 @@ class QuestionController extends GetxController
     _pageController.dispose();
   }
 
+  getTotalQuetionNumber(List<QuizModle> totalquizlList) {
+    quizmodelList = totalquizlList;
+    update();
+  }
+
   void checkAns(QuizModle question, int selectedIndex) {
     // because once user press any option then it will run
     _isAnswered = true;
@@ -75,12 +80,12 @@ class QuestionController extends GetxController
             duration: const Duration(milliseconds: 250), curve: Curves.ease);
       }
     } else {
-      if ((_qnController.numOfCorrectAns * 1) >= 3) {
-        Get.to(() => const AmezingScreen());
-      } else if ((_qnController.numOfCorrectAns * 1) == 2) {
-        Get.to(() => const GoodJobScreen());
-      } else if ((_qnController.numOfCorrectAns * 1) < 2) {
-        Get.to(() => const FailedScreen());
+      if ((numOfCorrectAns * 1) >= 3) {
+        Get.to(() => AmezingScreen(quizmodels: totalQuiz));
+      } else if ((numOfCorrectAns * 1) == 2) {
+        Get.to(() => GoodJobScreen(quizmodels: totalQuiz));
+      } else if ((numOfCorrectAns * 1) < 2) {
+        Get.to(() => FailedScreen(quizmodels: totalQuiz));
       }
     }
   }

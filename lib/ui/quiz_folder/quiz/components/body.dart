@@ -120,6 +120,12 @@ class _BodyState extends State<Body> {
                           ),
                         );
                       } else if (snapshot.hasData) {
+                        QuestionController _qnController =
+                            Get.put(QuestionController());
+
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          _qnController.getTotalQuetionNumber(snapshot.data!);
+                        });
                         return Expanded(
                           child: PageView.builder(
                               // Block swipe to next qn

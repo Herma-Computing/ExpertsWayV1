@@ -3,10 +3,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import '../../../models/quiz_models.dart';
 import '../../../services/controllers/question_controller.dart';
 
 class GoodJobScreen extends StatelessWidget {
-  const GoodJobScreen({Key? key}) : super(key: key);
+      List<QuizModle>quizmodels;
+   GoodJobScreen({required this.quizmodels , Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class GoodJobScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "${((qnController.numOfCorrectAns * 100)  / 3).roundToDouble()}%",
+                      "${((qnController.numOfCorrectAns * 100) / quizmodels.length).roundToDouble()}%",
                     style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                           color: Colors.white,
                           fontSize: 16,
