@@ -128,8 +128,8 @@ class SplashScreen extends StatelessWidget {
       animationDuration: const Duration(milliseconds: 1500),
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       pageTransitionType: PageTransitionType.fade,
-      nextScreen: name == null ? QuizScreen()  : const MenuDashboardLayout(),
-      //Onboarding()
+      nextScreen: name == null ? Onboarding() : const MenuDashboardLayout(),
+      //QuizScreen()
     );
   }
 }
