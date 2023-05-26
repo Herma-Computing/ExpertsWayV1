@@ -22,7 +22,7 @@ class _ProgressBarState extends State<ProgressBar> {
     return Padding(
       padding: const EdgeInsets.all(18.0),
       child: Container(
-        width: double.infinity,
+        width: double.infinity - 600,
         height: 11,
         decoration: BoxDecoration(
           border: Border.all(

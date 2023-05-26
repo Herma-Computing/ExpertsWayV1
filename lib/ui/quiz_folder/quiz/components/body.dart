@@ -3,11 +3,14 @@ import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
-import '../../../../models/quiz_models.dart';
+import '../../../../models/explore_quiz_model.dart';
 import '../../../../services/api_controller.dart';
 import '../../../../services/controllers/question_controller.dart';
 import 'progress_bar.dart';
 import 'question_card.dart';
+
+QuestionController _qnController = Get.put(QuestionController());
+QuestionController _controller = Get.find<QuestionController>();
 
 class Body extends StatefulWidget {
   const Body({
@@ -39,6 +42,7 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     // So that we have acccess our controller
     QuestionController allquestionController = Get.put(QuestionController());
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -50,7 +54,33 @@ class _BodyState extends State<Body> {
                 const SizedBox(
                   height: 10,
                 ),
-                ProgressBar(),
+                Row(
+                  children: [
+                    const SizedBox(
+                      height: 76,
+                    ),
+                    Expanded(child: ProgressBar()),
+                    const Icon(
+                      Icons.heart_broken,
+                      color: Colors.red,
+                      size: 24,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 10,
+                        right: 30,
+                      ),
+                      child: GetBuilder<QuestionController>(
+                          init: _controller,
+                          builder: (_) {
+                            return Text(
+                              '${_controller.quizLifes}',
+                              style: const TextStyle(fontSize: 25),
+                            );
+                          }),
+                    ),
+                  ],
+                ),
                 CircleAvatar(
                   radius: 55,
                   backgroundColor: HexColor('#26B0FF'),
@@ -88,11 +118,11 @@ class _BodyState extends State<Body> {
                     ),
                   ),
                 ),
-                FutureBuilder<List<QuizModle>>(
+                FutureBuilder<ExploreData>(
                   future: ApiProvider().retrieveQuiz(),
                   builder: (
                     BuildContext context,
-                    AsyncSnapshot<List<QuizModle>> snapshot,
+                    AsyncSnapshot<ExploreData> snapshot,
                   ) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Padding(
@@ -120,11 +150,10 @@ class _BodyState extends State<Body> {
                           ),
                         );
                       } else if (snapshot.hasData) {
-                        QuestionController _qnController =
-                            Get.put(QuestionController());
-
                         WidgetsBinding.instance.addPostFrameCallback((_) {
-                          _qnController.getTotalQuetionNumber(snapshot.data!);
+                          _qnController.getTotalQuetionNumber(
+                              snapshot.data!.listOfQuizModel,
+                              snapshot.data!.quizLife);
                         });
                         return Expanded(
                           child: PageView.builder(
@@ -133,10 +162,12 @@ class _BodyState extends State<Body> {
                               controller: allquestionController.pageController,
                               onPageChanged:
                                   allquestionController.updateTheQnNum,
-                              itemCount: snapshot.data!.length,
+                              itemCount: snapshot.data!.listOfQuizModel.length,
                               itemBuilder: (context, index) => QuestionCard(
-                                    question: snapshot.data![index],
-                                    listofQuizModle: snapshot.data!,
+                                    question:
+                                        snapshot.data!.listOfQuizModel[index],
+                                    listofQuizModle:
+                                        snapshot.data!.listOfQuizModel,
                                   )),
                         );
                       } else {

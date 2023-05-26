@@ -7,8 +7,8 @@ import '../../../models/quiz_models.dart';
 import '../../../services/controllers/question_controller.dart';
 
 class GoodJobScreen extends StatelessWidget {
-      List<QuizModle>quizmodels;
-   GoodJobScreen({required this.quizmodels , Key? key}) : super(key: key);
+    final  List<QuizModle>quizmodels;
+  const  GoodJobScreen({required this.quizmodels , Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

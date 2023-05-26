@@ -6,9 +6,13 @@ import 'package:hexcolor/hexcolor.dart';
 import '../../../models/quiz_models.dart';
 import '../../../services/controllers/question_controller.dart';
 
+
+
+
+
 class AmezingScreen extends StatelessWidget {
-  List<QuizModle>quizmodels;
-   AmezingScreen({required this.quizmodels ,Key? key}) : super(key: key);
+ final List<QuizModle>quizmodels;
+   const AmezingScreen({required this.quizmodels ,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

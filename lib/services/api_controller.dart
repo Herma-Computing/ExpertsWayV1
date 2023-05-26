@@ -4,6 +4,7 @@ import 'package:learncoding/models/lesson.dart';
 import 'package:learncoding/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/explore_quiz_model.dart';
 import '../models/quiz_models.dart';
 
 class ApiProvider {
@@ -48,7 +49,7 @@ class ApiProvider {
     }
   }
 
-    Future<List<QuizModle>> retrieveQuiz() async {
+    Future<ExploreData> retrieveQuiz() async {
     //initialize SharedPrefernec
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("Quiztoken",
@@ -65,8 +66,8 @@ class ApiProvider {
       quizModleList = (response.data['quiz'] as List)
           .map((i) => QuizModle.fromJson(i))
           .toList();
-          
-      return quizModleList;
+      
+      return  ExploreData(quizModleList, response.data['life']);
     } else {
       throw Exception('Failed to load course');
     }

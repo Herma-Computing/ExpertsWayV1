@@ -16,7 +16,9 @@ QuizProgressController progressController = Get.put(QuizProgressController());
 class QuestionController extends GetxController
     with GetSingleTickerProviderStateMixin {
   List<QuizModle> quizmodelList = [];
+  int quizLife = 0;
   List<QuizModle> get totalQuiz => quizmodelList;
+  int get quizLifes => quizLife;
 
   late PageController _pageController;
   PageController get pageController => _pageController;
@@ -52,8 +54,10 @@ class QuestionController extends GetxController
     _pageController.dispose();
   }
 
-  getTotalQuetionNumber(List<QuizModle> totalquizlList) {
+  getTotalQuetionNumber(List<QuizModle> totalquizlList, int life) {
     quizmodelList = totalquizlList;
+    quizLife = life;
+
     update();
   }
 
@@ -67,25 +71,36 @@ class QuestionController extends GetxController
   }
 
   nextQuestion(List<QuizModle> question) {
-    if (correctAns == selectedAns) _numOfCorrectAns++;
-    update();
-    if (_questionNumber.value != question.length) {
-      if (isAnswered == false) {
-        return Get.snackbar("you must select one answer",
-            "procedding without answer the quetion is not allowed");
+    if (isAnswered == false) {
+      return Get.snackbar("you must select one answer",
+          "procedding without answer the quetion is not allowed");
+    } else {
+      if (correctAns == selectedAns) {
+        _numOfCorrectAns++;
+        update();
       } else {
+        quizLife--;
+        update();
+      }
+
+      if (_questionNumber.value != question.length) {
         _isAnswered = false;
         progressController.increment();
         _pageController.nextPage(
             duration: const Duration(milliseconds: 250), curve: Curves.ease);
-      }
-    } else {
-      if ((numOfCorrectAns * 1) >= 3) {
-        Get.to(() => AmezingScreen(quizmodels: totalQuiz));
-      } else if ((numOfCorrectAns * 1) == 2) {
-        Get.to(() => GoodJobScreen(quizmodels: totalQuiz));
-      } else if ((numOfCorrectAns * 1) < 2) {
-        Get.to(() => FailedScreen(quizmodels: totalQuiz));
+      } else {
+        if ((((numOfCorrectAns * 100) / totalQuiz.length).roundToDouble()) >=
+            70) {
+          Get.to(() => AmezingScreen(quizmodels: totalQuiz));
+        } else if ((((numOfCorrectAns * 100) / totalQuiz.length)
+                .roundToDouble()) >=
+            50) {
+          Get.to(() => GoodJobScreen(quizmodels: totalQuiz));
+        } else if ((((numOfCorrectAns * 100) / totalQuiz.length)
+                .roundToDouble()) <=
+            50) {
+          Get.to(() => FailedScreen(quizmodels: totalQuiz));
+        }
       }
     }
   }
