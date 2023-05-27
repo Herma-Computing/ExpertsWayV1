@@ -83,12 +83,12 @@ class QuestionController extends GetxController
         update();
       }
 
-      if (_questionNumber.value != question.length) {
+      if (_questionNumber.value != question.length && correctAns == selectedAns) {
         _isAnswered = false;
         progressController.increment();
         _pageController.nextPage(
             duration: const Duration(milliseconds: 250), curve: Curves.ease);
-      } else {
+      } else if(_questionNumber.value == question.length && correctAns == selectedAns) {
         if ((((numOfCorrectAns * 100) / totalQuiz.length).roundToDouble()) >=
             70) {
           Get.to(() => AmezingScreen(quizmodels: totalQuiz));
