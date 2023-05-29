@@ -13,6 +13,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import '../../db/course_database.dart';
 import '../../models/lesson.dart';
 import '../../utils/color.dart';
+import '../quiz_folder/quiz/quiz_screen.dart';
 
 class CourseDetailPage extends StatefulWidget {
   final CourseElement courseData;
@@ -498,7 +499,21 @@ class CoursePagePageState extends State<CourseDetailPage> {
                                   size: 20,
                                 ),
                                 onPressed:
-                                    () {}, // TODO: implement this method: showing comments for this course
+                                    () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => QuizScreen()),
+                                  );
+                                }, // TODO: implement this method: showing comments for this course
+                              ),
+                              CupertinoButton(
+                                padding: const EdgeInsets.all(4),
+                                child: const Icon(
+                                  Icons.comment_outlined,
+                                  size: 20,
+                                ),
+                                onPressed:
+                                    () {}, // TOO: implement this method: showing comments for this course
                               ),
                               CupertinoButton(
                                 padding: const EdgeInsets.all(4),
