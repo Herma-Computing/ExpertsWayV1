@@ -16,9 +16,11 @@ QuizProgressController progressController = Get.put(QuizProgressController());
 class QuestionController extends GetxController
     with GetSingleTickerProviderStateMixin {
   List<QuizModle> quizmodelList = [];
-  int quizLife = 0;
+   int quizLife =0;
+   bool isfetched =false;
   List<QuizModle> get totalQuiz => quizmodelList;
   int get quizLifes => quizLife;
+    bool get isfetchedd => isfetched;
 
   late PageController _pageController;
   PageController get pageController => _pageController;
@@ -80,6 +82,8 @@ class QuestionController extends GetxController
         update();
       } else {
         quizLife--;
+        if(quizLife==0) isfetched = true;
+        
         update();
       }
 
