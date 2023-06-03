@@ -1,6 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:learncoding/routes/page.dart';
 import 'package:learncoding/ui/pages/navmenu/menu_dashboard_layout.dart';
 import 'package:learncoding/ui/pages/onboarding1.dart';
+import 'package:learncoding/ui/pages/termsandCondition.dart';
 import 'package:learncoding/ui/pages/undefined_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +10,12 @@ import 'package:flutter/services.dart';
 import 'package:learncoding/global/globals.dart' as globals;
 import 'package:learncoding/routes/router.dart' as router;
 import 'package:learncoding/ui/quiz_folder/quiz/quiz_screen.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
+
+import 'ui/pages/contentSubmited.dart';
 
 String? name;
 String? image;
@@ -21,7 +24,7 @@ late SharedPreferences prefs;
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // await Firebase.initializeApp();
+// await Firebase.initializeApp();
   SharedPreferences.getInstance().then((prefs) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
         .then((value) => runApp(
