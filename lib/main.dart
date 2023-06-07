@@ -1,6 +1,6 @@
 import 'package:learncoding/routes/page.dart';
 import 'package:learncoding/ui/pages/navmenu/menu_dashboard_layout.dart';
-import 'package:learncoding/ui/pages/onboarding1.dart';
+
 import 'package:learncoding/ui/pages/undefined_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 String? name;
 String? image;
@@ -20,6 +21,7 @@ late SharedPreferences prefs;
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
 
   // await Firebase.initializeApp();
   SharedPreferences.getInstance().then((prefs) {

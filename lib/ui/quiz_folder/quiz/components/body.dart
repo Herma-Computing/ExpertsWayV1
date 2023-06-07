@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:learncoding/services/ad_manager.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import '../../../../models/explore_quiz_model.dart';
@@ -24,7 +25,7 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   final _isHours = true;
-  bool isfetched=false;
+  bool isfetched = false;
   final StopWatchTimer _stopWatchTimer = StopWatchTimer(
     mode: StopWatchMode.countUp,
   );
@@ -44,6 +45,7 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     // So that we have acccess our controller
     QuestionController allquestionController = Get.put(QuestionController());
+    AdManager adsmanager=AdManager();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -74,11 +76,10 @@ class _BodyState extends State<Body> {
                       child: GetBuilder<QuestionController>(
                           init: _controller,
                           builder: (_) {
-                            return
-                                 Text(
-                                    '${_controller.quizLifes}',
-                                    style: const TextStyle(fontSize: 25),
-                                  );
+                            return Text(
+                              '${_controller.quizLifes}',
+                              style: const TextStyle(fontSize: 25),
+                            );
                             ;
                           }),
                     ),
@@ -157,7 +158,6 @@ class _BodyState extends State<Body> {
                           _qnController.getTotalQuetionNumber(
                               snapshot.data!.listOfQuizModel,
                               snapshot.data!.quizLife);
-                           
                         });
                         return Expanded(
                           child: PageView.builder(
@@ -185,55 +185,61 @@ class _BodyState extends State<Body> {
               ],
             ),
           ),
-        GetBuilder<QuestionController>(
+          GetBuilder<QuestionController>(
               init: _controller,
               builder: (_) {
-                return  _controller.isfetched ==true?   Positioned(
-            bottom: 250,
-            child: CupertinoAlertDialog(
-              
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.warning,
-                      color: Colors.red,
-                    ),
-                  ),
-                  Text(
-                    'Your life is Over !',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.red,
-                    ),
-                  ),
-                ],
-              ),
-              content: const Text(
-                  'do you want to refuel it? Click "Watch Ad below"'),
-              actions: <Widget>[
-                CupertinoDialogAction(
-                  isDefaultAction: true,
-                  child: const Text(
-                    'Watch Ad',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 14, 203, 255),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            ),
-          ):Container(height: 0, width: 0,);
+                return _controller.isfetched == true
+                    ? Positioned(
+                        bottom: 250,
+                        child: CupertinoAlertDialog(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Icon(
+                                  Icons.warning,
+                                  color: Colors.red,
+                                ),
+                              ),
+                              Text(
+                                'Your life is Over !',
+                                style: TextStyle(
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ],
+                          ),
+                          content: const Text(
+                              'do you want to refuel it? Click "Watch Ad below"'),
+                          actions: <Widget>[
+                            CupertinoDialogAction(
+                              isDefaultAction: true,
+                              child: const Text(
+                                'Watch Ad',
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromARGB(255, 14, 203, 255),
+                                ),
+                              ),
+                              onPressed: () {
+                                adsmanager.addAds(false,false,true);
+                                adsmanager.showRewardedAd();
+
+                              
+                              },
+                            )
+                          ],
+                        ),
+                      )
+                    : Container(
+                        height: 0,
+                        width: 0,
+                      );
               })
-       
         ],
       ),
     );
