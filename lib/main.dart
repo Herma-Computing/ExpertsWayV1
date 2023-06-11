@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:learncoding/global/globals.dart' as globals;
 import 'package:learncoding/routes/router.dart' as router;
-import 'package:learncoding/ui/quiz_folder/quiz/quiz_screen.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
