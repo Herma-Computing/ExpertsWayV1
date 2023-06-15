@@ -86,7 +86,8 @@ class AdManager {
     return _bannerAd;
   }
 
-  void showRewardedAd() {
+  showRewardedAd() {
+  
     if (_rewardedAd != null) {
       _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
           onAdShowedFullScreenContent: (RewardedAd ad) {
@@ -95,6 +96,7 @@ class AdManager {
         ad.dispose();
         loadRewardedAd();
       }, onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
+        
         ad.dispose();
         loadRewardedAd();
       });

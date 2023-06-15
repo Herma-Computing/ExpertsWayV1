@@ -16,11 +16,11 @@ QuizProgressController progressController = Get.put(QuizProgressController());
 class QuestionController extends GetxController
     with GetSingleTickerProviderStateMixin {
   List<QuizModle> quizmodelList = [];
-   int quizLife =0;
-   bool isfetched =false;
+  int quizLife = 0;
+  bool isfetched = false;
   List<QuizModle> get totalQuiz => quizmodelList;
   int get quizLifes => quizLife;
-    bool get isfetchedd => isfetched;
+  bool get isfetchedd => isfetched;
 
   late PageController _pageController;
   PageController get pageController => _pageController;
@@ -81,18 +81,22 @@ class QuestionController extends GetxController
         _numOfCorrectAns++;
         update();
       } else {
-        quizLife--;
-        if(quizLife==0) isfetched = true;
-        
+        if (quizLife > 0) {
+          quizLife--;
+        }
+        if (quizLife == 0) isfetched = true;
+
         update();
       }
 
-      if (_questionNumber.value != question.length && correctAns == selectedAns) {
+      if (_questionNumber.value != question.length &&
+          correctAns == selectedAns) {
         _isAnswered = false;
         progressController.increment();
         _pageController.nextPage(
             duration: const Duration(milliseconds: 250), curve: Curves.ease);
-      } else if(_questionNumber.value == question.length && correctAns == selectedAns) {
+      } else if (_questionNumber.value == question.length &&
+          correctAns == selectedAns) {
         if ((((numOfCorrectAns * 100) / totalQuiz.length).roundToDouble()) >=
             70) {
           Get.to(() => AmezingScreen(quizmodels: totalQuiz));

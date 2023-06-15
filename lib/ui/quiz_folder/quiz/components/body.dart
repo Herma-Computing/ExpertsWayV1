@@ -13,6 +13,7 @@ import 'question_card.dart';
 
 QuestionController _qnController = Get.put(QuestionController());
 QuestionController _controller = Get.find<QuestionController>();
+AdManager adsmanager = AdManager();
 
 class Body extends StatefulWidget {
   const Body({
@@ -32,6 +33,7 @@ class _BodyState extends State<Body> {
   @override
   void initState() {
     _stopWatchTimer.onStartTimer();
+        adsmanager.addAds(false, false, true);
     super.initState();
   }
 
@@ -43,9 +45,10 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
+
     // So that we have acccess our controller
     QuestionController allquestionController = Get.put(QuestionController());
-    AdManager adsmanager=AdManager();
+  
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -192,9 +195,9 @@ class _BodyState extends State<Body> {
                     ? Positioned(
                         bottom: 250,
                         child: CupertinoAlertDialog(
-                          title: Row(
+                          title: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
+                            children: [
                               Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Icon(
@@ -225,12 +228,10 @@ class _BodyState extends State<Body> {
                                   color: Color.fromARGB(255, 14, 203, 255),
                                 ),
                               ),
-                              onPressed: () {
-                                adsmanager.addAds(false,false,true);
-                                adsmanager.showRewardedAd();
+                              onPressed: ()=>  adsmanager.showRewardedAd(),
 
                               
-                              },
+                              
                             )
                           ],
                         ),
