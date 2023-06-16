@@ -83,7 +83,6 @@ class _BodyState extends State<Body> {
                               '${_controller.quizLifes}',
                               style: const TextStyle(fontSize: 25),
                             );
-                            ;
                           }),
                     ),
                   ],
@@ -195,9 +194,9 @@ class _BodyState extends State<Body> {
                     ? Positioned(
                         bottom: 250,
                         child: CupertinoAlertDialog(
-                          title: const Row(
+                          title: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Icon(
