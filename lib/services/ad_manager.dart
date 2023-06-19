@@ -27,7 +27,7 @@ class AdManager {
       }
     } on SocketException catch (_) {
       print('not connected');
-    }
+
   }
 
   void _setFullScreenContentCallback() {
