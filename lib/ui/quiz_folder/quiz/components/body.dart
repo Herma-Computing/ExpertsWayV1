@@ -33,7 +33,7 @@ class _BodyState extends State<Body> {
   @override
   void initState() {
     _stopWatchTimer.onStartTimer();
-        adsmanager.addAds(false, false, true);
+       adsmanager.loadRewardedAd();
     super.initState();
   }
 
@@ -228,7 +228,8 @@ class _BodyState extends State<Body> {
                                   color: Color.fromARGB(255, 14, 203, 255),
                                 ),
                               ),
-                              onPressed: ()=>  adsmanager.showRewardedAd(),
+                              onPressed:()=>adsmanager.showRewardedAd(),
+                              
 
                               
                               
