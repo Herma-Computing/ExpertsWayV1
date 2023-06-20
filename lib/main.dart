@@ -1,6 +1,5 @@
 import 'package:learncoding/routes/page.dart';
 import 'package:learncoding/ui/pages/navmenu/menu_dashboard_layout.dart';
-import 'package:learncoding/ui/pages/onboarding1.dart';
 
 import 'package:learncoding/ui/pages/undefined_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -136,3 +135,8 @@ class SplashScreen extends StatelessWidget {
     );
   }
 }
+// 
+
+
+ 
+

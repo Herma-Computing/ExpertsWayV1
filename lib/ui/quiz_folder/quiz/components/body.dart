@@ -33,14 +33,16 @@ class _BodyState extends State<Body> {
   @override
   void initState() {
     _stopWatchTimer.onStartTimer();
-        adsmanager.addAds(false, false, true);
+    adsmanager.createRewardedAd();
     super.initState();
   }
 
   @override
   void dispose() async {
     super.dispose();
+    adsmanager.rewardedAd?.dispose();
     await _stopWatchTimer.dispose();
+    
   }
 
   @override
@@ -215,7 +217,7 @@ class _BodyState extends State<Body> {
                             ],
                           ),
                           content: const Text(
-                              'do you want to refuel it? Click "Watch Ad below"'),
+                              'do you want to refuel it? Click "Watch Ad" below'),
                           actions: <Widget>[
                             CupertinoDialogAction(
                               isDefaultAction: true,
@@ -227,10 +229,11 @@ class _BodyState extends State<Body> {
                                   color: Color.fromARGB(255, 14, 203, 255),
                                 ),
                               ),
-                              onPressed: ()=>  adsmanager.showRewardedAd(),
-
-                              
-                              
+                              onPressed:()=>{
+                                if (adsmanager.rewardedAd != null) {
+                                  adsmanager.showRewardedAd()
+                                  }
+                              }
                             )
                           ],
                         ),

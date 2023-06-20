@@ -2,116 +2,60 @@ import 'dart:io';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdManager {
-  BannerAd? _bannerAd;
-  InterstitialAd? _interstitialAd;
-  RewardedAd? _rewardedAd;
+  RewardedAd? rewardedAd;
+  int _numRewardedLoadAttempts = 0;
+  int maxFailedLoadAttempts = 3;
 
-  void loadBannerAd() {
-    _bannerAd = BannerAd(
-      adUnitId: Platform.isIOS
-          ? "ca-app-pub-3940256099942544/2934735716"
-          : "ca-app-pub-3940256099942544/6300978111",
-      size: AdSize.banner,
-      request: const AdRequest(),
-      listener: const BannerAdListener(),
-    );
-
-    _bannerAd?.load();
-  }
-
-  void loadRewardedAd() {
+  void createRewardedAd(){
     RewardedAd.load(
-        adUnitId: Platform.isIOS
-            ? "ca-app-pub-3940256099942544/1712485313"
-            : "ca-app-pub-3940256099942544/5224354917",
-        request: const AdRequest(),
-        rewardedAdLoadCallback:
-            RewardedAdLoadCallback(onAdLoaded: (RewardedAd ad) {
-          _rewardedAd = ad;
-        }, onAdFailedToLoad: (LoadAdError error) {
-          _rewardedAd = null;
-        }));
-  }
-
-  void loadInterstitialAd() {
-    String interstitialAdId = Platform.isIOS
-        ? "ca-app-pub-3940256099942544/4411468910"
-        : "ca-app-pub-3940256099942544/1033173712";
-
-    InterstitialAd.load(
-        adUnitId: interstitialAdId,
-        request: const AdRequest(),
-        adLoadCallback: InterstitialAdLoadCallback(
-          onAdLoaded: (InterstitialAd ad) {
-            // Keep a reference to the ad so you can show it later.
-            _interstitialAd = ad;
-
-            ad.fullScreenContentCallback = FullScreenContentCallback(
-              onAdDismissedFullScreenContent: (InterstitialAd ad) {
-                ad.dispose();
-                loadInterstitialAd();
-              },
-              onAdFailedToShowFullScreenContent:
-                  (InterstitialAd ad, AdError error) {
-                ad.dispose();
-                loadInterstitialAd();
-              },
-            );
+        adUnitId: Platform.isAndroid
+            ? 'ca-app-pub-3940256099942544/5224354917'
+            : 'ca-app-pub-3940256099942544/1712485313',
+        request: AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+          onAdLoaded: (RewardedAd ad) {
+            print('$ad loaded.');
+            rewardedAd = ad;
+            _numRewardedLoadAttempts = 0;
+            // showRewardedAd();
           },
           onAdFailedToLoad: (LoadAdError error) {
-            print('InterstitialAd failed to load: $error');
+            print('RewardedAd failed to load: $error');
+            rewardedAd = null;
+            _numRewardedLoadAttempts += 1;
+            if (_numRewardedLoadAttempts < maxFailedLoadAttempts) {
+              createRewardedAd();
+            }
           },
         ));
   }
 
-  void addAds(bool interstitial, bool bannerAd, bool rewardedAd) {
-    if (interstitial) {
-      loadInterstitialAd();
+  void showRewardedAd() {
+    if (rewardedAd == null) {
+      print('Warning: attempt to show rewarded before loaded.');
+      return;
     }
-
-    if (bannerAd) {
-      loadBannerAd();
-    }
-
-    if (rewardedAd) {
-      loadRewardedAd();
-    }
-  }
-
-  void showInterstitial() {
-    _interstitialAd?.show();
-  }
-
-  BannerAd? getBannerAd() {
-    return _bannerAd;
-  }
-
-  showRewardedAd() {
-  
-    if (_rewardedAd != null) {
-      _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
-          onAdShowedFullScreenContent: (RewardedAd ad) {
-        print("Ad onAdShowedFullScreenContent");
-      }, onAdDismissedFullScreenContent: (RewardedAd ad) {
+    rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (RewardedAd ad) =>
+          print('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (RewardedAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
         ad.dispose();
-        loadRewardedAd();
-      }, onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
-        
+        createRewardedAd();
+      },
+      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
         ad.dispose();
-        loadRewardedAd();
-      });
+        createRewardedAd();
+      },
+    );
 
-      _rewardedAd!.setImmersiveMode(true);
-      _rewardedAd!.show(
-          onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
-        print("${reward.amount} ${reward.type}");
-      });
-    }
+    rewardedAd!.setImmersiveMode(true);
+    rewardedAd!.show(
+        onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
+          print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
+        });
+    rewardedAd = null;
   }
 
-  void disposeAds() {
-    _bannerAd?.dispose();
-    _interstitialAd?.dispose();
-    _rewardedAd?.dispose();
-  }
 }
