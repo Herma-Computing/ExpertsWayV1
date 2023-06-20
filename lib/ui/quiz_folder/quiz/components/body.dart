@@ -33,13 +33,14 @@ class _BodyState extends State<Body> {
   @override
   void initState() {
     _stopWatchTimer.onStartTimer();
-       adsmanager.loadRewardedAd();
+    adsmanager.createRewardedAd();
     super.initState();
   }
 
   @override
   void dispose() async {
     super.dispose();
+    adsmanager.rewardedAd?.dispose();
     await _stopWatchTimer.dispose();
     
   }
@@ -84,7 +85,6 @@ class _BodyState extends State<Body> {
                               '${_controller.quizLifes}',
                               style: const TextStyle(fontSize: 25),
                             );
-                            ;
                           }),
                     ),
                   ],
@@ -196,9 +196,9 @@ class _BodyState extends State<Body> {
                     ? Positioned(
                         bottom: 250,
                         child: CupertinoAlertDialog(
-                          title: const Row(
+                          title: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Icon(
@@ -217,7 +217,7 @@ class _BodyState extends State<Body> {
                             ],
                           ),
                           content: const Text(
-                              'do you want to refuel it? Click "Watch Ad below"'),
+                              'do you want to refuel it? Click "Watch Ad" below'),
                           actions: <Widget>[
                             CupertinoDialogAction(
                               isDefaultAction: true,
@@ -229,11 +229,11 @@ class _BodyState extends State<Body> {
                                   color: Color.fromARGB(255, 14, 203, 255),
                                 ),
                               ),
-                              onPressed:()=>adsmanager.showRewardedAd(),
-                              
-
-                              
-                              
+                              onPressed:()=>{
+                                if (adsmanager.rewardedAd != null) {
+                                  adsmanager.showRewardedAd()
+                                  }
+                              }
                             )
                           ],
                         ),
