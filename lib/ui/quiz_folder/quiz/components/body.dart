@@ -41,6 +41,7 @@ class _BodyState extends State<Body> {
   void dispose() async {
     super.dispose();
     await _stopWatchTimer.dispose();
+    
   }
 
   @override
