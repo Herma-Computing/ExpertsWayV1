@@ -8,9 +8,10 @@ import '../../models/quiz_models.dart';
 import '../../ui/quiz_folder/quiz_result_screen/amazing_screen.dart';
 import '../../ui/quiz_folder/quiz_result_screen/failed_screen.dart';
 import '../../ui/quiz_folder/quiz_result_screen/good_job_screen.dart';
+import '../api_controller.dart';
 
 QuizProgressController progressController = Get.put(QuizProgressController());
-
+ApiProvider apiprovider = ApiProvider();
 // We use get package for our state management
 
 class QuestionController extends GetxController
@@ -57,6 +58,7 @@ class QuestionController extends GetxController
   }
 
   getTotalQuetionNumber(List<QuizModle> totalquizlList, int life) {
+   
     quizmodelList = totalquizlList;
     quizLife = life;
 
@@ -99,14 +101,23 @@ class QuestionController extends GetxController
           correctAns == selectedAns) {
         if ((((numOfCorrectAns * 100) / totalQuiz.length).roundToDouble()) >=
             70) {
+          apiprovider.submitResult(
+              modelsTosendtoServer: QuizModeltosend(
+                  out_of: totalQuiz.length, score: numOfCorrectAns));
           Get.to(() => AmezingScreen(quizmodels: totalQuiz));
         } else if ((((numOfCorrectAns * 100) / totalQuiz.length)
                 .roundToDouble()) >=
             50) {
+          apiprovider.submitResult(
+              modelsTosendtoServer: QuizModeltosend(
+                  out_of: totalQuiz.length, score: numOfCorrectAns));
           Get.to(() => GoodJobScreen(quizmodels: totalQuiz));
         } else if ((((numOfCorrectAns * 100) / totalQuiz.length)
                 .roundToDouble()) <=
             50) {
+          apiprovider.submitResult(
+              modelsTosendtoServer: QuizModeltosend(
+                  out_of: totalQuiz.length, score: numOfCorrectAns));
           Get.to(() => FailedScreen(quizmodels: totalQuiz));
         }
       }

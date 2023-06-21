@@ -6,6 +6,7 @@ class AppUrl {
   static var courseUrl = '$baseUrl/courses';
   static var lessonUrl = '$baseUrl/lesson';
    static var quizUrl = 'https://dashencon.com/test/api/ds_quiz/v1/questions/17';
+   static var submitQuizScore='https://dashencon.com/test/api/ds_quiz/v1/result/submit/17';
 }
 
 class Constant {

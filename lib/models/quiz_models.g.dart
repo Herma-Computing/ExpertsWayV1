@@ -27,3 +27,15 @@ Map<String, dynamic> _$QuizModleToJson(QuizModle instance) => <String, dynamic>{
       'answer_options': instance.answerOptions,
       'correct_answer': instance.correctAnswer,
     };
+
+QuizModeltosend _$QuizModeltosendFromJson(Map<String, dynamic> json) =>
+    QuizModeltosend(
+      out_of: json['out_of'] as int,
+      score: json['score'] as int,
+    );
+
+Map<String, dynamic> _$QuizModeltosendToJson(QuizModeltosend instance) =>
+    <String, dynamic>{
+      'out_of': instance.out_of,
+      'score': instance.score,
+    };

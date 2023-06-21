@@ -35,3 +35,14 @@ class QuizModle {
 
   
 }
+@JsonSerializable()
+class QuizModeltosend {
+  final int out_of;
+  final int score;
+
+  const QuizModeltosend({required this.out_of, required this.score});
+
+  factory QuizModeltosend.fromJson(Map<String, dynamic> json) =>
+      _$QuizModeltosendFromJson(json);
+  Map<String, dynamic> toJson() => _$QuizModeltosendToJson(this);
+}

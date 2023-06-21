@@ -158,10 +158,13 @@ class _BodyState extends State<Body> {
                           ),
                         );
                       } else if (snapshot.hasData) {
+
                         WidgetsBinding.instance.addPostFrameCallback((_) {
                           _qnController.getTotalQuetionNumber(
                               snapshot.data!.listOfQuizModel,
-                              snapshot.data!.quizLife);
+                              //snapshot.data!.quizLife
+                              100,
+                              );
                         });
                         return Expanded(
                           child: PageView.builder(
