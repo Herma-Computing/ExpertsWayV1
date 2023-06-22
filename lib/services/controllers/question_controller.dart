@@ -68,7 +68,7 @@ class QuestionController extends GetxController
   void checkAns(QuizModle question, int selectedIndex) {
     // because once user press any option then it will run
     _isAnswered = true;
-    _correctAns = question.correctAnswer[0];
+    _correctAns = question.correct_answer[0];
     _selectedAns = selectedIndex;
 
     update();

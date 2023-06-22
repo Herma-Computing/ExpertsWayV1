@@ -49,10 +49,10 @@ class QuestionCard extends StatelessWidget {
               height: 25,
             ),
             ...List.generate(
-              question.answerOptions.length,
+              question.answer_options.length,
               (index) => Option(
                 index: index,
-                text: question.answerOptions[index],
+                text: question.answer_options[index],
                 press: () => controller.checkAns(question, index),
               ),
             ),
