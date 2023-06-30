@@ -18,10 +18,12 @@ class QuestionController extends GetxController
     with GetSingleTickerProviderStateMixin {
   List<QuizModle> quizmodelList = [];
   int quizLife = 0;
-  bool isfetched = false;
+  bool isZero = false;
+  int nextAutoFill=0;
   List<QuizModle> get totalQuiz => quizmodelList;
   int get quizLifes => quizLife;
-  bool get isfetchedd => isfetched;
+  int get autofill => nextAutoFill;
+  bool get isQuizLifeZero => isZero;
 
   late PageController _pageController;
   PageController get pageController => _pageController;
@@ -57,10 +59,11 @@ class QuestionController extends GetxController
     _pageController.dispose();
   }
 
-  getTotalQuetionNumber(List<QuizModle> totalquizlList, int life) {
+  getTotalQuetionNumber(List<QuizModle> totalquizlList, int life,int auizAutofill ) {
    
     quizmodelList = totalquizlList;
     quizLife = life;
+   nextAutoFill=auizAutofill;
 
     update();
   }
@@ -86,7 +89,21 @@ class QuestionController extends GetxController
         if (quizLife > 0) {
           quizLife--;
         }
-        if (quizLife == 0) isfetched = true;
+        if (quizLife == 0) {
+          isZero = true;
+        Future.delayed(const Duration(seconds: 10), () {
+          if(quizLife == 0){
+          isZero=false;
+          quizLife = autofill;
+  
+           update();
+          }
+    
+
+});
+
+                 
+        }
 
         update();
       }

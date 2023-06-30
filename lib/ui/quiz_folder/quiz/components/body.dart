@@ -162,8 +162,9 @@ class _BodyState extends State<Body> {
                         WidgetsBinding.instance.addPostFrameCallback((_) {
                           _qnController.getTotalQuetionNumber(
                               snapshot.data!.listOfQuizModel,
-                              //snapshot.data!.quizLife
-                              100,
+                              snapshot.data!.quizLife,
+                               snapshot.data!.quizLifeAutoFill,
+                              
                               );
                         });
                         return Expanded(
@@ -195,7 +196,7 @@ class _BodyState extends State<Body> {
           GetBuilder<QuestionController>(
               init: _controller,
               builder: (_) {
-                return _controller.isfetched == true
+                return _controller.isQuizLifeZero == true
                     ? Positioned(
                         bottom: 250,
                         child: CupertinoAlertDialog(
@@ -220,14 +221,14 @@ class _BodyState extends State<Body> {
                             ],
                           ),
                           content: const Text(
-                              'do you want to refuel it? Click "Watch Ad" below'),
+                              'Wait 3 hourse or  Click "Watch Ad" button below to refuel it'),
                           actions: <Widget>[
                             CupertinoDialogAction(
                               isDefaultAction: true,
                               child: const Text(
                                 'Watch Ad',
                                 style: TextStyle(
-                                  fontSize: 18.0,
+                                  fontSize: 15-.0,
                                   fontWeight: FontWeight.bold,
                                   color: Color.fromARGB(255, 14, 203, 255),
                                 ),

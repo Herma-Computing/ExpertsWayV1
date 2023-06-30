@@ -74,7 +74,7 @@ class ApiProvider {
           .map((i) => QuizModle.fromJson(i))
           .toList();
 
-      return ExploreData(quizModleList, response.data['life']);
+      return ExploreData(quizModleList, response.data['life'], response.data['next_auto_fuel'] );
     } else {
       throw Exception('Failed to load course');
     }
