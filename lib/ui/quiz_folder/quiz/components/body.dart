@@ -42,15 +42,12 @@ class _BodyState extends State<Body> {
     super.dispose();
     adsmanager.rewardedAd?.dispose();
     await _stopWatchTimer.dispose();
-    
   }
 
   @override
   Widget build(BuildContext context) {
-
     // So that we have acccess our controller
     QuestionController allquestionController = Get.put(QuestionController());
-  
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -150,22 +147,20 @@ class _BodyState extends State<Body> {
                         // if there is no internet connection the code excutes here,
                         // you must handle internet connection
                         print(snapshot.error);
-                        return const Padding(
+                        return Padding(
                           padding: EdgeInsets.all(38.0),
                           child: Text(
-                            "you don't have internet conneection or low internet connection problem",
+                            "${snapshot.error}....or  you don't have internet conneection or low internet connection problem",
                             style: TextStyle(fontSize: 15),
                           ),
                         );
                       } else if (snapshot.hasData) {
-
                         WidgetsBinding.instance.addPostFrameCallback((_) {
                           _qnController.getTotalQuetionNumber(
-                              snapshot.data!.listOfQuizModel,
-                              snapshot.data!.quizLife,
-                               snapshot.data!.quizLifeAutoFill,
-                              
-                              );
+                            snapshot.data!.listOfQuizModel,
+                            snapshot.data!.quizLife,
+                          snapshot.data!.quizLifeAutoFill,
+                          );
                         });
                         return Expanded(
                           child: PageView.builder(
@@ -200,9 +195,9 @@ class _BodyState extends State<Body> {
                     ? Positioned(
                         bottom: 250,
                         child: CupertinoAlertDialog(
-                          title: Row(
+                          title: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
+                            children: [
                               Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Icon(
@@ -220,25 +215,23 @@ class _BodyState extends State<Body> {
                               ),
                             ],
                           ),
-                          content: const Text(
-                              'Wait 3 hourse or  Click "Watch Ad" button below to refuel it'),
+                          content: Text(
+                              'Wait ${_controller.theremainingTime} minutes  or  Click "Watch Ad" button below to refuel it'),
                           actions: <Widget>[
                             CupertinoDialogAction(
-                              isDefaultAction: true,
-                              child: const Text(
-                                'Watch Ad',
-                                style: TextStyle(
-                                  fontSize: 15-.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(255, 14, 203, 255),
+                                isDefaultAction: true,
+                                child: const Text(
+                                  'Watch Ad',
+                                  style: TextStyle(
+                                    fontSize: 15 - .0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromARGB(255, 14, 203, 255),
+                                  ),
                                 ),
-                              ),
-                              onPressed:()=>{
-                                if (adsmanager.rewardedAd != null) {
-                                  adsmanager.showRewardedAd()
-                                  }
-                              }
-                            )
+                                onPressed: () => {
+                                      if (adsmanager.rewardedAd != null)
+                                        {adsmanager.showRewardedAd()}
+                                    })
                           ],
                         ),
                       )

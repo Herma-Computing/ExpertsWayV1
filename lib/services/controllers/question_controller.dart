@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -19,11 +21,14 @@ class QuestionController extends GetxController
   List<QuizModle> quizmodelList = [];
   int quizLife = 0;
   bool isZero = false;
-  int nextAutoFill=0;
+  int nextAutoFill = 0;
+  late int remainingTime = 0; //initial time in seconds
+  late Timer _timer;
   List<QuizModle> get totalQuiz => quizmodelList;
   int get quizLifes => quizLife;
   int get autofill => nextAutoFill;
   bool get isQuizLifeZero => isZero;
+  int get theremainingTime => remainingTime;
 
   late PageController _pageController;
   PageController get pageController => _pageController;
@@ -59,11 +64,11 @@ class QuestionController extends GetxController
     _pageController.dispose();
   }
 
-  getTotalQuetionNumber(List<QuizModle> totalquizlList, int life,int auizAutofill ) {
-   
+  getTotalQuetionNumber(
+      List<QuizModle> totalquizlList, int life, int auizAutofill) {
     quizmodelList = totalquizlList;
     quizLife = life;
-   nextAutoFill=auizAutofill;
+    nextAutoFill = auizAutofill;
 
     update();
   }
@@ -91,18 +96,7 @@ class QuestionController extends GetxController
         }
         if (quizLife == 0) {
           isZero = true;
-        Future.delayed(const Duration(seconds: 10), () {
-          if(quizLife == 0){
-          isZero=false;
-          quizLife = autofill;
-  
-           update();
-          }
-    
-
-});
-
-                 
+          _startTimer();
         }
 
         update();
@@ -143,5 +137,34 @@ class QuestionController extends GetxController
 
   void updateTheQnNum(int index) {
     _questionNumber.value = index + 1;
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  //Timer  that counts down the auto_fill_quiz_value
+  void _startTimer() {
+    remainingTime = (autofill * 6); //initial time in seconds
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (autofill > 0) {
+        
+        remainingTime--;
+        if (remainingTime == 0 && quizLife == 0) {
+          isZero = false;
+          quizLife = autofill;
+
+          update();
+        }
+
+        update();
+      } else {
+        _timer.cancel();
+        update();
+      }
+      
+    });
   }
 }
