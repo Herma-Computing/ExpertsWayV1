@@ -27,12 +27,23 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   final _isHours = true;
   bool isfetched = false;
+  
   final StopWatchTimer _stopWatchTimer = StopWatchTimer(
     mode: StopWatchMode.countUp,
   );
+  late final StopWatchTimer timers = StopWatchTimer(
+      mode: StopWatchMode.countDown,
+      presetMillisecond:
+          StopWatchTimer.getMilliSecFromMinute(5),
+      onEnded: () {
+        _qnController.fuelTimer();
+      });
+
   @override
   void initState() {
     _stopWatchTimer.onStartTimer();
+    timers.onStartTimer();
+
     adsmanager.createRewardedAd();
     super.initState();
   }
@@ -94,13 +105,15 @@ class _BodyState extends State<Body> {
                     radius: 51,
                     child: StreamBuilder<int>(
                       stream: _stopWatchTimer.rawTime,
-                      initialData: _stopWatchTimer.rawTime.value,
+                      initialData: 5,
                       builder: (context, snap) {
                         final value = snap.data!;
                         final displayTime = StopWatchTimer.getDisplayTime(
                           value,
                           hours: _isHours,
                           milliSecond: false,
+                          second: true,
+                          minute: true,
                         );
                         return Column(
                           children: <Widget>[
@@ -155,11 +168,12 @@ class _BodyState extends State<Body> {
                           ),
                         );
                       } else if (snapshot.hasData) {
+                      
                         WidgetsBinding.instance.addPostFrameCallback((_) {
                           _qnController.getTotalQuetionNumber(
                             snapshot.data!.listOfQuizModel,
                             snapshot.data!.quizLife,
-                          snapshot.data!.quizLifeAutoFill,
+                            snapshot.data!.quizLifeAutoFill,
                           );
                         });
                         return Expanded(
@@ -215,8 +229,26 @@ class _BodyState extends State<Body> {
                               ),
                             ],
                           ),
-                          content: Text(
-                              'Wait ${_controller.theremainingTime} minutes  or  Click "Watch Ad" button below to refuel it'),
+
+                          // ${_controller.theremainingTime}
+
+                          content: StreamBuilder<int>(
+                            stream: timers.rawTime,
+                            initialData: timers.rawTime.value,
+                            builder: (context, snap) {
+                              final value = snap.data!;
+                              final displayTime = StopWatchTimer.getDisplayTime(
+                                value,
+                                hours: true,
+                                milliSecond: false,
+                                minute: true,
+                                second: true,
+                              );
+
+                              return Text(
+                                  'Wait ${displayTime} minutes  or  Click "Watch Ad" button below to refuel it');
+                            },
+                          ),
                           actions: <Widget>[
                             CupertinoDialogAction(
                                 isDefaultAction: true,

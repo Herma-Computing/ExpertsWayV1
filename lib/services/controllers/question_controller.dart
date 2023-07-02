@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:learncoding/services/controllers/quiz_progress_bar_controller.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import '../../models/quiz_models.dart';
 import '../../ui/quiz_folder/quiz_result_screen/amazing_screen.dart';
@@ -22,13 +23,12 @@ class QuestionController extends GetxController
   int quizLife = 0;
   bool isZero = false;
   int nextAutoFill = 0;
-  late int remainingTime = 0; //initial time in seconds
+
   late Timer _timer;
   List<QuizModle> get totalQuiz => quizmodelList;
   int get quizLifes => quizLife;
   int get autofill => nextAutoFill;
   bool get isQuizLifeZero => isZero;
-  int get theremainingTime => remainingTime;
 
   late PageController _pageController;
   PageController get pageController => _pageController;
@@ -96,7 +96,7 @@ class QuestionController extends GetxController
         }
         if (quizLife == 0) {
           isZero = true;
-          _startTimer();
+       
         }
 
         update();
@@ -140,31 +140,22 @@ class QuestionController extends GetxController
   }
 
   @override
-  void dispose() {
+  void dispose()  {
     _timer.cancel();
     super.dispose();
+
   }
 
   //Timer  that counts down the auto_fill_quiz_value
-  void _startTimer() {
-    remainingTime = (autofill * 6); //initial time in seconds
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (autofill > 0) {
-        
-        remainingTime--;
-        if (remainingTime == 0 && quizLife == 0) {
-          isZero = false;
-          quizLife = autofill;
+  void fuelTimer() {
+    if (quizLife == 0) {
+      isZero = false;
+      // quizLife = autofill;
+      quizLife=3;
 
-          update();
-        }
-
-        update();
-      } else {
-        _timer.cancel();
-        update();
-      }
-      
-    });
+      update();
+    }
   }
+
+
 }
