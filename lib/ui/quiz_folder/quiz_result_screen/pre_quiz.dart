@@ -25,7 +25,7 @@ class TermsAndConditions extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blue,
         elevation: 0,
         leading: IconButton(
           onPressed: () => {},
