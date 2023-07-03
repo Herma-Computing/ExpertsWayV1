@@ -6,6 +6,7 @@ import 'package:learncoding/services/ad_manager.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import '../../../../models/explore_quiz_model.dart';
+import '../../../../models/quiz_models.dart';
 import '../../../../services/api_controller.dart';
 import '../../../../services/controllers/question_controller.dart';
 import 'progress_bar.dart';
@@ -16,8 +17,11 @@ QuestionController _controller = Get.find<QuestionController>();
 AdManager adsmanager = AdManager();
 
 class Body extends StatefulWidget {
-  const Body({
-    Key? key,
+  
+  List<QuizModle> listOfQuizModel;
+
+ 
+   Body({required this.listOfQuizModel, Key? key,
   }) : super(key: key);
 
   @override
@@ -136,69 +140,18 @@ class _BodyState extends State<Body> {
                     ),
                   ),
                 ),
-                FutureBuilder<ExploreData>(
-                  future: ApiProvider().retrieveQuiz(),
-                  builder: (
-                    BuildContext context,
-                    AsyncSnapshot<ExploreData> snapshot,
-                  ) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 100),
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            backgroundColor: Colors.black26,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              HexColor('#26B0FF').withOpacity(1), //<-- SEE HERE
-                            ),
-                          ),
-                        ),
-                      );
-                    } else if (snapshot.connectionState ==
-                        ConnectionState.done) {
-                      if (snapshot.hasError) {
-                        // if there is no internet connection the code excutes here,
-                        // you must handle internet connection
-                        print(snapshot.error);
-                        return Padding(
-                          padding: EdgeInsets.all(38.0),
-                          child: Text(
-                            "${snapshot.error}....or  you don't have internet conneection or low internet connection problem",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                        );
-                      } else if (snapshot.hasData) {
-                      
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          _qnController.getTotalQuetionNumber(
-                            snapshot.data!.listOfQuizModel,
-                            snapshot.data!.quizLife,
-                            snapshot.data!.quizLifeAutoFill,
-                          );
-                        });
-                        return Expanded(
+                Expanded(
                           child: PageView.builder(
                               // Block swipe to next qn
                               physics: const NeverScrollableScrollPhysics(),
                               controller: allquestionController.pageController,
-                              onPageChanged:
-                                  allquestionController.updateTheQnNum,
-                              itemCount: snapshot.data!.listOfQuizModel.length,
+                              onPageChanged: allquestionController.updateTheQnNum,
+                              itemCount: widget.listOfQuizModel.length,
                               itemBuilder: (context, index) => QuestionCard(
-                                    question:
-                                        snapshot.data!.listOfQuizModel[index],
-                                    listofQuizModle:
-                                        snapshot.data!.listOfQuizModel,
+                                    question:widget.listOfQuizModel[index],
+                                    listofQuizModle: widget.listOfQuizModel
                                   )),
-                        );
-                      } else {
-                        return const Text('Empty data');
-                      }
-                    } else {
-                      return Text('State: ${snapshot.connectionState}');
-                    }
-                  },
-                ),
+                        )
               ],
             ),
           ),

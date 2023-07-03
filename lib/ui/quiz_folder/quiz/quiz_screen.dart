@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../quiz_result_screen/pre_quiz.dart';
 import 'components/body.dart';
 
 class QuizScreen extends StatelessWidget {
@@ -9,7 +10,7 @@ class QuizScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       extendBodyBehindAppBar: true,
-      body: Body(),
+      body: TermsAndConditions(),
     );
   }
 }
