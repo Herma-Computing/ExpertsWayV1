@@ -24,11 +24,13 @@ class QuestionController extends GetxController
   bool isZero = false;
   int nextAutoFill = 0;
 
+
   late Timer _timer;
   List<QuizModle> get totalQuiz => quizmodelList;
   int get quizLifes => quizLife;
   int get autofill => nextAutoFill;
   bool get isQuizLifeZero => isZero;
+   
 
   late PageController _pageController;
   PageController get pageController => _pageController;
@@ -67,8 +69,9 @@ class QuestionController extends GetxController
   getTotalQuetionNumber(
       List<QuizModle> totalquizlList, int life, int auizAutofill) {
     quizmodelList = totalquizlList;
-    quizLife = life;
+     quizLife = life;
     nextAutoFill = auizAutofill;
+
 
     update();
   }
@@ -96,7 +99,7 @@ class QuestionController extends GetxController
         }
         if (quizLife == 0) {
           isZero = true;
-       
+          apiprovider.sendZero(0);
         }
 
         update();

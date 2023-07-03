@@ -40,3 +40,4 @@ class QuizModeltosend {
       _$QuizModeltosendFromJson(json);
   Map<String, dynamic> toJson() => _$QuizModeltosendToJson(this);
 }
+

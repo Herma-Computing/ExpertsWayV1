@@ -158,13 +158,13 @@ class _BodyState extends State<Body> {
           GetBuilder<QuestionController>(
               init: _controller,
               builder: (_) {
-                return _controller.isQuizLifeZero == true
+                return _controller.isQuizLifeZero == true 
                     ? Positioned(
                         bottom: 250,
                         child: CupertinoAlertDialog(
-                          title: Row(
+                          title: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
+                            children: [
                               Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Icon(
