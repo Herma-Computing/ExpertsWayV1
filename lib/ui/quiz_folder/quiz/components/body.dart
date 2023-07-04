@@ -20,6 +20,8 @@ class Body extends StatefulWidget {
   
   List<QuizModle> listOfQuizModel;
 
+
+
  
    Body({required this.listOfQuizModel, Key? key,
   }) : super(key: key);
@@ -29,26 +31,22 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  final _isHours = true;
-  bool isfetched = false;
+
+    bool iscount = false;
+
+
   
   final StopWatchTimer _stopWatchTimer = StopWatchTimer(
     mode: StopWatchMode.countUp,
   );
-  late final StopWatchTimer timers = StopWatchTimer(
-      mode: StopWatchMode.countDown,
-      presetMillisecond:
-          StopWatchTimer.getMilliSecFromMinute(5),
-      onEnded: () {
-        _qnController.fuelTimer();
-      });
+  
+
 
   @override
   void initState() {
     _stopWatchTimer.onStartTimer();
-    timers.onStartTimer();
 
-    adsmanager.createRewardedAd();
+ adsmanager.createRewardedAd();
     super.initState();
   }
 
@@ -114,7 +112,7 @@ class _BodyState extends State<Body> {
                         final value = snap.data!;
                         final displayTime = StopWatchTimer.getDisplayTime(
                           value,
-                          hours: _isHours,
+                          hours: true,
                           milliSecond: false,
                           second: true,
                           minute: true,
@@ -158,7 +156,15 @@ class _BodyState extends State<Body> {
           GetBuilder<QuestionController>(
               init: _controller,
               builder: (_) {
-                return _controller.isQuizLifeZero == true 
+                  late final StopWatchTimer timers = StopWatchTimer(
+                    mode: StopWatchMode.countDown,
+                    presetMillisecond: StopWatchTimer.getMilliSecFromMinute(
+                        _qnController.autofill),
+                    onEnded: () {
+                      _qnController.fuelTimer();
+                    });
+                    timers.onStartTimer();
+                return _controller.isQuizLifeZero == true  
                     ? Positioned(
                         bottom: 250,
                         child: CupertinoAlertDialog(
@@ -229,4 +235,7 @@ class _BodyState extends State<Body> {
       ),
     );
   }
+  
+  
+
 }

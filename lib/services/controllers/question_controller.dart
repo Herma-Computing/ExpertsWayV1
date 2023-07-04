@@ -8,10 +8,12 @@ import 'package:learncoding/services/controllers/quiz_progress_bar_controller.da
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import '../../models/quiz_models.dart';
+import '../../ui/quiz_folder/quiz/components/body.dart';
 import '../../ui/quiz_folder/quiz_result_screen/amazing_screen.dart';
 import '../../ui/quiz_folder/quiz_result_screen/failed_screen.dart';
 import '../../ui/quiz_folder/quiz_result_screen/good_job_screen.dart';
 import '../api_controller.dart';
+
 
 QuizProgressController progressController = Get.put(QuizProgressController());
 ApiProvider apiprovider = ApiProvider();
@@ -155,6 +157,7 @@ class QuestionController extends GetxController
       isZero = false;
       // quizLife = autofill;
       quizLife=3;
+  
 
       update();
     }
